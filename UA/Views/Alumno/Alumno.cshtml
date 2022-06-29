@@ -1,0 +1,42 @@
+﻿@*
+    @{
+        ViewBag.Title = "Alumno";
+
+    }
+
+    <h2>@ViewBag.Title.</h2>
+    <h3>@ViewBag.Message</h3>
+*@
+
+@model UA.Models.AlumnoViewModel
+
+<p>Espacio del Alumno</p>
+
+<h1>Registrar</h1>
+
+<form action="Alumno/Alumno" method="POST">
+    <label for="Nombre">Nombre</label><br />
+    <input class="form-control" type="text" id="Nombre" name="Nombre" value="@Model.Nombre" />
+    <span style="color:red">@Html.ValidationMessageFor(m => m.Nombre)</span><br />
+    @*@Html.TextBoxFor(m => m.Nombre)<br />*@
+
+    <label for="Apellido">Apellido</label><br />
+    <input class="form-control" type="text" id="Apellido" name="Apellido" value="@Model.Apellido" />
+    <span style="color:red">@Html.ValidationMessageFor(m => m.Apellido)</span><br />
+
+    <label for="IDcarrera">ID de Carrera</label><br />
+    <input class="form-control" type="text" id="IDcarrera" name="IDcarrera" value="@Model.IDcarrera" />
+    <span style="color:red">@Html.ValidationMessageFor(m => m.IDcarrera)</span><br />
+
+    <button>Registrar</button>
+</form>
+
+        <h1>Materias</h1>
+
+
+
+
+
+
+
+
