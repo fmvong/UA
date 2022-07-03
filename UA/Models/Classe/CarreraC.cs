@@ -8,9 +8,9 @@ using System.Web;
 namespace UA.Models
 {
     [Table("Carreras")]
-    public class CarreraViewModel
+    public class CarreraC
     {
-        public int ID { get; set; }
+        public string ID { get; set; }
 
         public string Carrera { get; set; }
 

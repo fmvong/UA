@@ -33,8 +33,8 @@ namespace UA.Models
 
         public DbSet<Alumno> Alumnos { get; set; }
         public DbSet<MateriaC> Materias { get; set; }
-        //public DbSet<AcademicViewModel.Carreras> Carreras { get; set; }
-        public DbSet<Historial> Historial { get; set; }
+        public DbSet<Inscripcion> Inscripcion { get; set; }
+        public DbSet<CarreraC> Carreras { get; set; }
 
     }
 }

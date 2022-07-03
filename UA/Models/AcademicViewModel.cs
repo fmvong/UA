@@ -12,7 +12,7 @@ namespace UA.Models
     {
         #region Constructor
         public AcademicViewModel() { }
-        public AcademicViewModel(List<CarreraViewModel> carreras)
+        public AcademicViewModel(List<CarreraC> carreras)
         {
             foreach (var carrera in carreras)
             {
@@ -22,14 +22,14 @@ namespace UA.Models
         }
         #endregion
 
-        public List<CarreraViewModel> Carreras { get; set; }
+        public List<CarreraC> Carreras { get; set; }
 
         public List<MateriaC> Materias { get; set; }
 
         #region Methods
-        public CarreraViewModel ToEntity()
+        public CarreraC ToEntity()
         {
-            return new CarreraViewModel
+            return new CarreraC
             {
                 ID = this.Carreras[0].ID,
                 Carrera = this.Carreras[0].Carrera,

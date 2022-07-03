@@ -15,37 +15,29 @@ namespace UA.Controllers
         {
             ViewBag.Message = "Bienvenido Admin";
 
-            return View(new AdminDataViewModel());
+            return View(new CarreraC());
         }
 
         [HttpPost]
-        public ActionResult index(AdminDataViewModel model)
+        public ActionResult index(CarreraC model)
         {
             if (ModelState.IsValid)
             {
                 var db = new ApplicationDbContext();
-
-                int a = model.IDC;
-                String b = model.CarreraC;
-
-                //int a = model.IDC;
-                //String b = model.CarreraC;
-
-                //db.Carreras.Add(new CarreraViewModel { ID = a, Carrera = b });
-                /*
-                db.Carreras.Add(model.ToEntity());
-                foreach (var carrera in model.Carreras)
-                {
-                    db.Carreras.Add(model.ToEntity());
-                }*/
-                //int ultimoID = db.Alumnos.ToList().Last().ID;
-                //db.Alumnos.Add(model.ToEntity(ultimoID));
+                db.Carreras.Add(new CarreraC { ID = model.ID, Carrera = model.Carrera });
                 db.SaveChanges();
 
-
-                return RedirectToAction("CreacionAluExitosa", new { id = 1 });
+                return RedirectToAction("ExitoRegistroCarrera", new { nombre = model.Carrera });
             }
             return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult ExitoRegistroCarrera(String nomCarrera)
+        {
+            ViewBag.Message = (nomCarrera);
+
+            return View();
         }
 
 
@@ -64,7 +56,7 @@ namespace UA.Controllers
             {
                 var db = new ApplicationDbContext();
 
-                int a = model.Carreras[0].ID;
+                String a = model.Carreras[0].ID;
                 String b = model.Carreras[0].Carrera;
 
                 //db.Carreras.Add(new CarreraViewModel { ID = a, Carrera = b });

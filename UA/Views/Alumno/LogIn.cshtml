@@ -1,4 +1,4 @@
-﻿@model UA.Models.Alumno
+﻿@model UA.Models.Alumno.ID
 
 <h1>Log In</h1>
 
@@ -6,7 +6,7 @@
     <form action="/Alumno/MateriasAlu" method="POST">
         <label for="ID">ID del Alumno</label><br />
         <input class="form-control" type="text" id="ID" name="ID" value="@Model.ID" />
-        <span style="color:red">@Html.ValidationMessageFor(m => m.Nombre)</span><br />
+        @*<span style="color:red">@Html.ValidationMessageFor(m => m.Nombre)</span><br />*@
 
         <button class="boton-switch">Ingresar</button>
     </form>

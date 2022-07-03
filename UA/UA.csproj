@@ -184,8 +184,10 @@
     <Compile Include="Models\AdminDataViewModel.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AcademicViewModel.cs" />
+    <Compile Include="Models\InscripcionViewModel.cs" />
+    <Compile Include="Models\Classe\Inscripcion.cs" />
     <Compile Include="Models\Classe\Historial.cs" />
-    <Compile Include="Models\CarreraViewModel.cs" />
+    <Compile Include="Models\Classe\CarreraC.cs" />
     <Compile Include="Models\Classe\Alumno.cs" />
     <Compile Include="Models\AlumnoViewModel.cs" />
     <Compile Include="Models\HistorialAluViewModel.cs" />
@@ -258,6 +260,8 @@
     <Content Include="Views\Alumno\CreacionAluExitosa.cshtml" />
     <Content Include="Views\Alumno\LogIn.cshtml" />
     <Content Include="Views\Admin\index.cshtml" />
+    <Content Include="Views\Alumno\NuevaInscripcion.cshtml" />
+    <Content Include="Views\Admin\ExitoRegistroCarrera.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

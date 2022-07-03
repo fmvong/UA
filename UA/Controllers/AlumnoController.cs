@@ -12,7 +12,26 @@ namespace UA.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        //codigo incompleto para traer las materias en las que un alumno esta inscripto.
+        [HttpGet]
+        public ActionResult NuevaInscripcion()
+        {
+            return View(new InscripcionViewModel());
+        }
+
+        [HttpPost]
+        public ActionResult NuevaInscripcion(InscripcionViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var db = new ApplicationDbContext();
+                int ultimoID = db.Inscripcion.ToList().Last().Id;
+                db.Inscripcion.Add(model.AgregarId(ultimoID));
+                db.SaveChanges();
+
+                return RedirectToAction("MateriasAlu");     //, new { id = model.IdAlumno }
+            }
+            return View(model);
+        }
 
         [HttpGet]
         public ActionResult LogIn()
@@ -21,44 +40,40 @@ namespace UA.Controllers
         }
 
         [HttpPost]
-        public ActionResult LogIn(Alumno alumno)
+        public ActionResult LogIn(int idAlumno)
         {
-            var historial = new List<Historial>();
-            historial.Add(new Historial());
-            historial[0].IdAlumno = alumno.ID; 
+            /*var historial = new List<Inscripcion>();
+            var A = new Inscripcion();
+            A.IdAlumno = alumno.ID;
+            historial.Add(A);
+            historial[0].IdAlumno = alumno.ID;*/ 
 
-            return RedirectToAction("MateriasAlu", new { historial });
+            return RedirectToAction("MateriasAlu", new { id = idAlumno});
+            //return View(historial);
         }
+
         [HttpGet]
         public ActionResult MateriasAlu()
-        { 
+        {
+            /*List<Inscripcion> materias = db.Inscripcion.ToList();
+            List<InscripcionViewModel> model = new List<InscripcionViewModel>(); 
+            foreach(Inscripcion inscripcion in materias)
+            {
+                model.Add(new InscripcionViewModel { IdAlumno = inscripcion.IdAlumno, IDMateria = inscripcion.IDMateria });
+            }*/
 
-            return View();
+            List<Inscripcion> materias = db.Inscripcion.ToList();
+            return View(materias);
         }
 
 
         [HttpPost]
-        public ActionResult MateriasAlu(List<Historial> historial)
+        public ActionResult MateriasAlu(int idAlumno)
         {
-
-            if (ModelState.IsValid)
-            {
-                //var db = new ApplicationDbContext();
-
-                /*using (db)
-                {
-
-                    var modelMaterias = db.Materias.SqlQuery("Select * from Materias").ToList();
-
-                }*/
-
-
-                //db.SaveChanges();
-                var modelMaterias = db.Historial.SqlQuery("Select * from Historial").ToList();
-                return View(modelMaterias);
-            }
-
-            return View();
+            List<Inscripcion> materias = new List<Inscripcion>();
+            materias = db.Inscripcion.ToList();
+            return View(materias);
+          
         }
 
         [HttpGet]

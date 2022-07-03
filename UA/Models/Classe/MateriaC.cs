@@ -4,12 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace UA.Models
 {
     [Table("Materias")]
     public class MateriaC
-    {
+    {   
+        [Key]
         public string ID { get; set; }
 
         public string Materia { get; set; }

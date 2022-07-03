@@ -7,27 +7,23 @@ using System.Web;
 
 namespace UA.Models
 {
-    //[Table("Historial")]
-    public class Historialxxxxx
+    [Table("Inscripcion")]
+    public class Inscripcion
     {
         public int IdAlumno { get; set; }
 
-        [ForeignKey("IdAlumno")]
-        public Alumno ID { get; set; }
+        /*[ForeignKey("IdAlumno")]
+        public Alumno ID { get; set; }*/
 
         public string IDMateria { get; set; }
-
-        //[ForeignKey("IDMateria")]
-        //public MateriaC ID { get; set; }
 
         public string Fecha { get; set; }
 
         public string Nota { get; set; }
 
-        /*[Key]
-        public Guid Id { get; set; }*/
+        [Key]
+        public int Id { get; set; }
 
     }
-
 
 }
