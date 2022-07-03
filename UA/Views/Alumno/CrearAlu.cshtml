@@ -1,9 +1,7 @@
 ﻿@*
     @{
         ViewBag.Title = "Alumno";
-
     }
-
     <h2>@ViewBag.Title.</h2>
     <h3>@ViewBag.Message</h3>
 *@
@@ -14,7 +12,7 @@
 
 <h1>Registrar</h1>
 
-<form action="Alumno/Alumno" method="POST">
+<form action="/Alumno/CrearAlu" method="POST">
     <label for="Nombre">Nombre</label><br />
     <input class="form-control" type="text" id="Nombre" name="Nombre" value="@Model.Nombre" />
     <span style="color:red">@Html.ValidationMessageFor(m => m.Nombre)</span><br />
@@ -28,15 +26,20 @@
     <input class="form-control" type="text" id="IDcarrera" name="IDcarrera" value="@Model.IDcarrera" />
     <span style="color:red">@Html.ValidationMessageFor(m => m.IDcarrera)</span><br />
 
-    <button>Registrar</button>
+    <button class="boton-switch">Registrar</button>
 </form>
-
-        <h1>Materias</h1>
-
+<br />
 
 
+@*<form action="/Alumno/MateriasAlu" method="POST">
+    <label for="ID">ID del Alumno</label><br />
+    <input class="form-control" type="text" id="ID" name="IDalumno" value="" />
+    <span style="color:red">@Html.ValidationMessageFor(m => m.IDcarrera)</span><br />
+
+    <button class="boton-switch">Ingresar</button>
+</form>*@
 
 
+<p><a href="https://localhost:44321/Alumno/LogIn" class="boton">Ya estoy Registrado</a></p>
 
-
-
+<!-- <p><a href="https://localhost:44321/Alumno/ShowAlu" class="btn btn-primary btn-lg">Alumnos Inscriptos</a></p> -->

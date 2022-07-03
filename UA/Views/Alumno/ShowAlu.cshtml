@@ -1,0 +1,22 @@
+﻿@model List<UA.Models.Alumno>
+
+<h1>Materias</h1>
+
+<div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Materia</th>
+            <th>ID Carrera</th>
+        </tr>
+        @foreach (var alumno in Model)
+        {
+            <tr>
+                <td>@alumno.ID</td>
+                <td>@alumno.Nombre</td>
+                <td>@alumno.IDcarrera</td>
+            </tr>
+        }
+    </table>
+    <p><a href="https://localhost:44321/Alumno/CrearAlu" class="btn btn-lg">Volver</a></p>
+</div>

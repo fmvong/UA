@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using UA.Models;
 
 namespace UA.Models
 {
@@ -30,6 +31,10 @@ namespace UA.Models
             return new ApplicationDbContext();
         }
 
-        public DbSet<AlumnoViewModel> Alumnos { get; set; }
+        public DbSet<Alumno> Alumnos { get; set; }
+        public DbSet<MateriaC> Materias { get; set; }
+        //public DbSet<AcademicViewModel.Carreras> Carreras { get; set; }
+        public DbSet<Historial> Historial { get; set; }
+
     }
 }

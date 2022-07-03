@@ -1,0 +1,24 @@
+﻿@model UA.Models.AdminDataViewModel
+
+<p>Espacio del Administrador</p>
+
+<h1>Registrar</h1>
+
+<form action="/Admin/index" method="POST">
+    @foreach (var carrera in Model.Carreras)
+    {
+        <label for="IDcarrera">ID de Carrera</label><br />
+        <input class="form-control" type="text" id="ID" name="ID" value="@carrera.ID" />
+        @*<span style="color:red">@Html.ValidationMessageFor(m => m.IDcarrera)</span><br />*@
+
+        <label for="Nombre">Nombre</label><br />
+        <input class="form-control" type="text" id="Carrera" name="Carrera" value="@carrera.Carrera" />
+        @*<span style="color:red">@Html.ValidationMessageFor(m => m.Nombre)</span><br />*@
+        @*@Html.TextBoxFor(m => m.Nombre)<br />*@
+    }
+    <button class="boton-switch">Crear</button>
+</form>
+<br />
+
+
+
