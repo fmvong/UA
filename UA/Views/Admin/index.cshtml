@@ -5,19 +5,23 @@
 <h1>Registrar Carreras</h1>
 
 <form action="/Admin/index" method="POST">
-    
-        <label for="IDcarrera">ID de Carrera</label><br />
-        <input class="form-control" type="text" id="ID" name="ID" value="@Model.ID" />
-        @*<span style="color:red">@Html.ValidationMessageFor(m => m.IDcarrera)</span><br />*@
 
-        <label for="Nombre">Nombre</label><br />
-        <input class="form-control" type="text" id="Carrera" name="Carrera" value="@Model.Carrera" />
-        @*<span style="color:red">@Html.ValidationMessageFor(m => m.Nombre)</span><br />*@
-        @*@Html.TextBoxFor(m => m.Nombre)<br />*@
-    
+    <label for="IDcarrera">ID de Carrera</label><br />
+    <input class="form-control" type="text" id="ID" name="ID" value="@Model.ID" />
+    @*<span style="color:red">@Html.ValidationMessageFor(m => m.IDcarrera)</span><br />*@
+
+    <label for="Nombre">Nombre</label><br />
+    <input class="form-control" type="text" id="Carrera" name="Carrera" value="@Model.Carrera" />
+    @*<span style="color:red">@Html.ValidationMessageFor(m => m.Nombre)</span><br />*@
+    @*@Html.TextBoxFor(m => m.Nombre)<br />*@
+
     <button class="boton-switch">Crear</button>
 </form>
 <br />
+<p><a href="https://localhost:44321/Admin/CargaMateria" class="btn btn-lg">Cargar Materia Nueva</a></p>
+
+<br />
+<p><a href="https://localhost:44321/Alumno/index" class="btn btn-lg">Volver</a></p>
 
 
 

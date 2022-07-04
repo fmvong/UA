@@ -11,6 +11,25 @@ namespace UA.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public ActionResult CargaMateria()
+        {
+            return View(new MateriaC());
+        }
+
+        [HttpPost]
+        public ActionResult CargaMateria(MateriaC model)
+        {
+            if (ModelState.IsValid)
+            {
+                var db = new ApplicationDbContext();
+                db.Materias.Add(new MateriaC { ID = model.ID, Materia = model.Materia, IDcarrera = model.IDcarrera, IDcorrelativa1 = model.IDcorrelativa1, IDcorrelativa2 = model.IDcorrelativa2, Semestre = model.Semestre});
+                db.SaveChanges();
+
+                return RedirectToAction("ExitoRegistroMateria", new { nombre = model.Materia });
+            }
+            return View(model);
+        }
+
         public ActionResult index()
         {
             ViewBag.Message = "Bienvenido Admin";

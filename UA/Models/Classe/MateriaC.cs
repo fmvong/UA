@@ -18,9 +18,9 @@ namespace UA.Models
 
         public string IDcarrera { get; set; }
 
-        public string Correlativa1 { get; set; }
+        public string IDcorrelativa1 { get; set; }
 
-        public string Correlativa2 { get; set; }
+        public string IDcorrelativa2 { get; set; }
 
         public int Semestre { get; set; }
     }

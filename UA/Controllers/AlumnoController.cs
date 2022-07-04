@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using UA.Models;
-using System.Linq;
 
 namespace UA.Controllers
 {
