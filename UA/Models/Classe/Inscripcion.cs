@@ -19,10 +19,10 @@ namespace UA.Models
 
         public string Fecha { get; set; }
 
-        public string Nota { get; set; }
+        public int Nota { get; set; }
 
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
     }
 

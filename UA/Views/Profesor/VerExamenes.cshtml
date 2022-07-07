@@ -1,0 +1,36 @@
+﻿
+@model List<UA.Models.Inscripcion>
+
+<h1>Materias</h1>
+<p>@ViewBag.Message</p>
+
+<div>
+    <form action="/Profesor/VerExamenes" method="POST">
+        <label for="Nombre">Nombre</label><br />
+        <input class="form-control" type="text" id="Nombre" name="Nombre" value="" />
+        @*<span style="color:red">@Html.ValidationMessageFor(m => m.Nombre)</span><br />*@
+
+        <button class="boton-switch">Mostrar</button>
+    </form>
+    <br />
+    <table>
+        <tr>
+            <th>ID del Alumno</th>
+            <th>ID de la Materia</th>
+            <th>Fecha</th>
+            <th>Nota</th>
+        </tr>
+        @foreach (var inscripcion in Model)
+        {
+            <tr>
+                <td>@inscripcion.IdAlumno</td>
+                <td>@inscripcion.IDMateria</td>
+                <td>@inscripcion.Fecha</td>
+                <td>@inscripcion.Nota</td>
+            </tr>
+        }
+    </table>
+
+</div>
+<br />
+

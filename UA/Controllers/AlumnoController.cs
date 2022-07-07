@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using UA.Models;
 
 namespace UA.Controllers
@@ -10,6 +11,15 @@ namespace UA.Controllers
     public class AlumnoController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        [HttpGet]
+        public ActionResult CancelarIns(Guid id)
+        {
+            Inscripcion inscripcion = db.Inscripcion.First(i => i.Id == id);
+            db.Inscripcion.Remove(inscripcion);
+            db.SaveChanges();
+            return RedirectToAction("MateriasAlu", new { id = inscripcion.IdAlumno });
+        }
 
         [HttpGet]
         public ActionResult NuevaInscripcion()
@@ -22,57 +32,97 @@ namespace UA.Controllers
         {
             if (ModelState.IsValid)
             {
-                var db = new ApplicationDbContext();
-                int ultimoID = db.Inscripcion.ToList().Last().Id;
-                db.Inscripcion.Add(model.AgregarId(ultimoID));
+                //var db = new ApplicationDbContext();
+                //model.Id = Guid.NewGuid();
+                db.Inscripcion.Add(model.AgregarId());
                 db.SaveChanges();
-
-                return RedirectToAction("MateriasAlu");     //, new { id = model.IdAlumno }
+                return RedirectToAction("MateriasAlu", new { id = model.IdAlumno });
             }
+            //ViewBag.Message = ("No cargo lista");
             return View(model);
         }
 
         [HttpGet]
         public ActionResult LogIn()
         {
-            return View(new Alumno());
+            return View(new LogInViewModel());
+
+
+            /*List<Inscripcion> listaId = new List<Inscripcion>();
+            Inscripcion a = new Inscripcion();
+            a.IdAlumno = 8;
+            listaId.Add(a);
+
+            int id = listaId[0].IdAlumno;
+            List<Inscripcion> materias = new List<Inscripcion>();
+            List<Inscripcion> materiasAlu = new List<Inscripcion>();
+            materias = db.Inscripcion.ToList();
+            foreach (Inscripcion materia in materias)
+            {
+                if (materia.IdAlumno == id)
+                {
+                    materiasAlu.Add(materia);
+                }
+            }
+
+            return View(materiasAlu);*/
         }
 
         [HttpPost]
-        public ActionResult LogIn(int idAlumno)
+        public ActionResult LogIn(LogInViewModel logIn)
         {
-            /*var historial = new List<Inscripcion>();
-            var A = new Inscripcion();
-            A.IdAlumno = alumno.ID;
-            historial.Add(A);
-            historial[0].IdAlumno = alumno.ID;*/ 
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("MateriasAlu", new { id = logIn.Id });
 
-            return RedirectToAction("MateriasAlu", new { id = idAlumno});
-            //return View(historial);
+                /*int id = list[0].IdAlumno;
+                List<Inscripcion> materias = new List<Inscripcion>();
+                List<Inscripcion> materiasAlu = new List<Inscripcion>();
+                materias = db.Inscripcion.ToList();
+                foreach (Inscripcion materia in materias)
+                {
+                    if (materia.IdAlumno == id)
+                    {
+                        materiasAlu.Add(materia);
+                    }
+                }
+
+                return View(materiasAlu);*/
+                //
+            }
+            return View(logIn);
         }
 
         [HttpGet]
-        public ActionResult MateriasAlu()
+        public ActionResult MateriasAlu(int id)
         {
-            /*List<Inscripcion> materias = db.Inscripcion.ToList();
-            List<InscripcionViewModel> model = new List<InscripcionViewModel>(); 
-            foreach(Inscripcion inscripcion in materias)
-            {
-                model.Add(new InscripcionViewModel { IdAlumno = inscripcion.IdAlumno, IDMateria = inscripcion.IDMateria });
-            }*/
+            List<Inscripcion> listaId = new List<Inscripcion>();
+            Inscripcion a = new Inscripcion();
+            a.IdAlumno = id;
+            listaId.Add(a);
 
-            List<Inscripcion> materias = db.Inscripcion.ToList();
+            List<Inscripcion> materias = new List<Inscripcion>();
+            materias = db.Inscripcion.Where(i => i.IdAlumno == id).ToList();
             return View(materias);
         }
 
 
         [HttpPost]
-        public ActionResult MateriasAlu(int idAlumno)
+        public ActionResult MateriasAlu(List<Inscripcion> listaId)
         {
+            int id = listaId[0].IdAlumno;
             List<Inscripcion> materias = new List<Inscripcion>();
+            List<Inscripcion> materiasAlu = new List<Inscripcion>();
             materias = db.Inscripcion.ToList();
-            return View(materias);
-          
+            foreach(Inscripcion materia in materias)
+            {
+                if(materia.IdAlumno == id)
+                {
+                    materiasAlu.Add(materia);
+                }
+            }
+
+            return View(materiasAlu);
         }
 
         [HttpGet]
@@ -151,6 +201,5 @@ namespace UA.Controllers
                 ModelState.AddModelError(nameof(model.IDcarrera), "La carrera no es valida");
             }
         }
-
     }
 }

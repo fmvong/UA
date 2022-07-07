@@ -4,18 +4,20 @@
 <h1>Materias</h1>
 
 <div>
-    <table>
+    <table class="table table-striped">
         <tr>
             <th>ID</th>
             <th>Fecha</th>
             <th>Nota</th>
+            <th>Cancelar</th>
         </tr>
-        @foreach (var materia in Model)
+        @foreach (var inscripcion in Model)
         {
             <tr>
-                <td>@materia.IDMateria</td>
-                <td>@materia.Fecha</td>
-                <td>@materia.Nota</td>
+                <td>@inscripcion.IDMateria</td>
+                <td>@inscripcion.Fecha</td>
+                <td>@inscripcion.Nota</td>
+                <td><a href='@string.Format("https://localhost:44321/Alumno/CancelarIns/{0}", inscripcion.Id)' class="btn btn-lg">Sí</a></td>
             </tr>
         }
     </table>
@@ -23,6 +25,5 @@
 </div>
 <br />
 <p><a href="https://localhost:44321/Alumno/NuevaInscripcion" class="btn btn-lg">Inscribirse</a></p>
-
 <br />
 <p><a href="https://localhost:44321/Alumno/CrearAlu" class="btn btn-lg">Volver</a></p>

@@ -1,10 +1,12 @@
 ﻿
-@model UA.Models.InscripcionViewModel
+@model UA.Models.Inscripcion
 
-<h1>Nueva Inscripcion</h1>
-@*<p>@ViewBag.Message</p>*@
+<h1>Cancelar Inscripción a Materia</h1>
+
 <div>
-    <form action="/Alumno/NuevaInscripcion" method="POST">
+    <form action="/Alumno/CancelarIns" method="POST">
+        @Html.HiddenFor(q => q.Id)
+
         <label for="IdAlumno">ID alumno</label><br />
         <input class="form-control" type="text" id="IdAlumno" name="IdAlumno" value="@Model.IdAlumno" />
         <span style="color:red">@Html.ValidationMessageFor(m => m.IdAlumno)</span><br />
@@ -13,13 +15,9 @@
         <input class="form-control" type="text" id="IDMateria" name="IDMateria" value="@Model.IDMateria" />
         <span style="color:red">@Html.ValidationMessageFor(m => m.IDMateria)</span><br />
 
-        <button class="boton-switch">Registrar</button>
+        <button class="boton-switch">Cancelar Inscripcion</button>
     </form>
 </div>
 
 <br />
-@*<p><a href='@string.Format("https://localhost:44321/Alumno/MateriasAlu/{0}", @Model.Id)' class="btn btn-lg">Volver</a></p>*@
-
-
-
-
+<p><a href="https://localhost:44321/Alumno/MateriasAlu" class="btn btn-lg">Volver</a></p>

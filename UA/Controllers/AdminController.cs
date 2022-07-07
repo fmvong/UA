@@ -11,6 +11,10 @@ namespace UA.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public ActionResult ExitoRegMateria()
+        {
+            return View();
+        }
         public ActionResult CargaMateria()
         {
             return View(new MateriaC());

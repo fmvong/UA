@@ -10,7 +10,7 @@ namespace UA.Models
     public class InscripcionViewModel
     {
         #region Constructor
-        public InscripcionViewModel() { }
+        public InscripcionViewModel() {}
         public InscripcionViewModel(Inscripcion inscripcion)
         {
             this.IdAlumno = inscripcion.IdAlumno;
@@ -20,39 +20,24 @@ namespace UA.Models
 
         #region Properties
 
-            [Required(ErrorMessage = "Debe cargar su Nombre")]
-        public string Nombre { get; set; }
-        [Required(ErrorMessage = "Debe cargar su Apellido")]
-        public string Apellido { get; set; }
-        [Required(ErrorMessage = "Debe cargar su Carrera")]
-        public string IDcarrera { get; set; }
-
         #endregion
+        [Required(ErrorMessage = "Debe cargar su Id")]
         public int IdAlumno { get; set; }
-
+        [Required(ErrorMessage = "Debe cargar Id de la Materia")]
         public string IDMateria { get; set; }
 
         #region Methods
-        public Alumno ToEntity(int ultimoAlu)
-        {
-            return new Alumno
-            {
-                Nombre = this.Nombre,
-                Apellido = this.Apellido,
-                IDcarrera = this.IDcarrera,
-                ID = ultimoAlu+1,
-            };
-        }
+        
         #endregion
-        public Inscripcion AgregarId(int ultimaIns)
+        public Inscripcion AgregarId()
         {
             return new Inscripcion
             {
                 IdAlumno = this.IdAlumno,
                 IDMateria = this.IDMateria,
-                Fecha = "",
-                Nota = "",
-                Id = ultimaIns + 1,
+                Fecha = " ",
+                //Nota = null,
+                Id = Guid.NewGuid(),
             };
         }
     }
