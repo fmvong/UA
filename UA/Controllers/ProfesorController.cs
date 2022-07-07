@@ -11,31 +11,74 @@ namespace UA.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Profesor
-        public ActionResult Index()
+        public ActionResult AsignarNota(Guid id)
         {
-            return View();
-        }
+            //List<Inscripcion> listaId = new List<Inscripcion>();
+            //Inscripcion inscripcion = new Inscripcion();
+            Inscripcion inscripcion = db.Inscripcion.First(i => i.Id == id);
+            inscripcion.Id = id;
+            //listaId.Add(a);
 
-        public ActionResult VerExamenes()
-        {
-            return View(new List<Inscripcion>());
-        }
+            //List<Inscripcion> materias = new List<Inscripcion>();
+            //materias = db.Inscripcion.Where(i => i.Id == id).ToList();
+            return View(inscripcion);
 
+            //return View(new NotaViewModel());
+        }
         [HttpPost]
-        public ActionResult VerExamenes(List<Inscripcion> model)
+        public ActionResult AsignarNota(NotaViewModel materiaid)
         {
             if (ModelState.IsValid)
             {
-                //var db = new ApplicationDbContext();
-                //var inscripciones = db.Inscripcion.ToList();
-                ViewBag.Message = ("La lista se cargo de db");
-                //int a = db.Alumnos.Count();
-                return View(db.Inscripcion.ToList());
-                //return RedirectToAction("ExitoRegistroMateria", new { nombre = model.Materia });
+                return RedirectToAction("VerExamenes", new { id = materiaid.Id });
             }
-            ViewBag.Message = ("No cargo lista");
-            return View(model);
+            return View(materiaid);
+        }
+
+        // GET: Profesor
+        public ActionResult Index()
+        {
+            return View(new MateriaLogInViewModel());
+        }
+        [HttpPost]
+        public ActionResult Index(MateriaLogInViewModel materiaid)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("VerExamenes", new { id = materiaid.ID });
+            }
+            return View(materiaid);
+        }
+
+        [HttpGet]
+        public ActionResult VerExamenes(string id)
+        {
+            List<Inscripcion> listaId = new List<Inscripcion>();
+            Inscripcion a = new Inscripcion();
+            a.IDMateria = id;
+            listaId.Add(a);
+
+            List<Inscripcion> materias = new List<Inscripcion>();
+            materias = db.Inscripcion.Where(i => i.IDMateria == id).ToList();
+            return View(materias);
+        }
+
+        [HttpPost]
+        public ActionResult VerExamenes(List<MateriaC> materiasId)
+        {
+            string id = materiasId[0].ID;
+            List<Inscripcion> inscripciones = new List<Inscripcion>();
+            List<Inscripcion> materiasfiltro = new List<Inscripcion>();
+            inscripciones = db.Inscripcion.ToList();
+            foreach (Inscripcion materia in inscripciones)
+            {
+                if (materia.IDMateria == id)
+                {
+                    materiasfiltro.Add(materia);
+                }
+            }
+
+            return View(materiasfiltro);
         }
 
         

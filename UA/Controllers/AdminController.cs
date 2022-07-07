@@ -17,11 +17,11 @@ namespace UA.Controllers
         }
         public ActionResult CargaMateria()
         {
-            return View(new MateriaC());
+            return View(new MateriaViewModel());
         }
 
         [HttpPost]
-        public ActionResult CargaMateria(MateriaC model)
+        public ActionResult CargaMateria(MateriaViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -29,7 +29,7 @@ namespace UA.Controllers
                 db.Materias.Add(new MateriaC { ID = model.ID, Materia = model.Materia, IDcarrera = model.IDcarrera, IDcorrelativa1 = model.IDcorrelativa1, IDcorrelativa2 = model.IDcorrelativa2, Semestre = model.Semestre});
                 db.SaveChanges();
 
-                return RedirectToAction("ExitoRegistroMateria", new { nombre = model.Materia });
+                return RedirectToAction("ExitoRegMateria", new { nombre = model.Materia });
             }
             return View(model);
         }
@@ -38,11 +38,11 @@ namespace UA.Controllers
         {
             ViewBag.Message = "Bienvenido Admin";
 
-            return View(new CarreraC());
+            return View(new CarreraViewModel());
         }
 
         [HttpPost]
-        public ActionResult index(CarreraC model)
+        public ActionResult index(CarreraViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -56,7 +56,7 @@ namespace UA.Controllers
         }
 
         [HttpGet]
-        public ActionResult ExitoRegistroCarrera(String nomCarrera)
+        public ActionResult ExitoRegistroCarrera(string nomCarrera)
         {
             ViewBag.Message = (nomCarrera);
 
@@ -64,7 +64,7 @@ namespace UA.Controllers
         }
 
 
-        // GET: Admin
+        /*// GET: Admin
         public ActionResult index1()
         {
             ViewBag.Message = "Bienvenido Admin";
@@ -83,12 +83,12 @@ namespace UA.Controllers
                 String b = model.Carreras[0].Carrera;
 
                 //db.Carreras.Add(new CarreraViewModel { ID = a, Carrera = b });
-                /*
+                *//*
                 db.Carreras.Add(model.ToEntity());
                 foreach (var carrera in model.Carreras)
                 {
                     db.Carreras.Add(model.ToEntity());
-                }*/
+                }*//*
                 //int ultimoID = db.Alumnos.ToList().Last().ID;
                     //db.Alumnos.Add(model.ToEntity(ultimoID));
                 db.SaveChanges();
@@ -97,6 +97,6 @@ namespace UA.Controllers
                 return RedirectToAction("CreacionAluExitosa", new { id = 1 });
             }
             return View(model);
-        }
+        }*/
     }
 }

@@ -5,13 +5,13 @@
 <p>@ViewBag.Message</p>
 
 <div>
-    <form action="/Profesor/VerExamenes" method="POST">
+    <!--<form action="/Profesor/VerExamenes" method="POST">
         <label for="Nombre">Nombre</label><br />
-        <input class="form-control" type="text" id="Nombre" name="Nombre" value="" />
+        <input class="form-control" type="text" id="Nombre" name="Nombre" value="" />-->
         @*<span style="color:red">@Html.ValidationMessageFor(m => m.Nombre)</span><br />*@
 
-        <button class="boton-switch">Mostrar</button>
-    </form>
+        <!--<button class="boton-switch">Mostrar</button>
+    </form>-->
     <br />
     <table>
         <tr>
@@ -22,15 +22,23 @@
         </tr>
         @foreach (var inscripcion in Model)
         {
-            <tr>
-                <td>@inscripcion.IdAlumno</td>
-                <td>@inscripcion.IDMateria</td>
-                <td>@inscripcion.Fecha</td>
-                <td>@inscripcion.Nota</td>
-            </tr>
+    <tr>
+        <td>@inscripcion.IdAlumno</td>
+        <td>@inscripcion.IDMateria</td>
+        <td>@inscripcion.Fecha</td>
+        @if (inscripcion.Nota == 0)
+        {
+            <td><a href='@string.Format("https://localhost:44321/Profesor/AsignarNota", inscripcion.Id)' class="btn btn-lg">Asignar</a></td>
+        }
+        else
+        {
+            <td>@inscripcion.Nota</td>
+        }
+    </tr>
         }
     </table>
 
 </div>
 <br />
+<p><a href="https://localhost:44321/Profesor/Index" class="btn btn-lg">Volver</a></p>
 

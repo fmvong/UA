@@ -1,0 +1,36 @@
+﻿@model UA.Models.MateriaLogInViewModel
+
+<h1>Filtro de Materias</h1>
+
+<div>
+    <form action="/Profesor/Index" method="POST">
+        <label for="ID">ID de la Materia</label><br />
+        <input class="form-control" type="text" id="ID" name="ID" value="@Model.ID" />
+        @*<span style="color:red">@Html.ValidationMessageFor(m => m.Id)</span><br />*@
+        <br />
+        <button class="boton-switch">Ingresar</button>
+    </form>
+
+    <br />
+
+    @*<div>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Nota</th>
+            </tr>
+            @foreach (var materia in Model)
+            {
+                <tr>
+                    <td>@materia.IDMateria</td>
+                    <td>@materia.Fecha</td>
+                    <td>@materia.Nota</td>
+                </tr>
+            }
+        </table>
+
+    </div>*@
+    <br />
+
+</div>
