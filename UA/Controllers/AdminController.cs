@@ -23,32 +23,17 @@ namespace UA.Controllers
         [HttpPost]
         public ActionResult CargaMateria(MateriaViewModel model)
         {
-
             ValidarCarrera(model);
             ValidarMateria(model);
             if (ModelState.IsValid)
             {
-                //if (ValidarMateria(model) && ValidarCarrera(model)) {
-                //if (ValidarCarrera(model)) {
                 db.Materias.Add(new MateriaC { ID = model.ID, Materia = model.Materia, IDcarrera = model.IDcarrera, IDcorrelativa1 = model.IDcorrelativa1, IDcorrelativa2 = model.IDcorrelativa2, Semestre = model.Semestre });
                 db.SaveChanges();
 
                 return RedirectToAction("ExitoRegMateria", new { nombre = model.Materia });
-                //}
             }
             return View(model);
         }
-
-        /* private void ValidarCarrera(MateriaViewModel model)
-         {
-             CarreraC carrera = db.Carreras.First(i => i.ID == model.IDcarrera);
-
-             if (carrera.ID != model.ID)
-             {
-                 ModelState.AddModelError(nameof(model.IDcarrera), "La carrera no existe");
-             }
-             //return (carreraExiste);
-         }*/
 
         private void ValidarCarrera(MateriaViewModel model)
         {
@@ -83,8 +68,6 @@ namespace UA.Controllers
                 ModelState.AddModelError(nameof(model.ID), "La materia ya existe");
             }
         }
-
-
 
         public ActionResult index()
         {

@@ -30,11 +30,13 @@ namespace UA.Controllers
         [HttpPost]
         public ActionResult NuevaInscripcion(InscripcionViewModel model)
         {
+            ValidarYaInscripto(model);
+            ValidarMateriaExiste(model);
+            Validar7materias(model);
+            ValidarCorrelativa1(model);
+            ValidarCorrelativa2(model);
             if (ModelState.IsValid)
             {
-                //var db = new ApplicationDbContext();
-                //model.Id = Guid.NewGuid();
-                //ValidarCorrelativa(model);
                 db.Inscripcion.Add(model.AgregarId());
                 db.SaveChanges();
                 return RedirectToAction("MateriasAlu", new { id = model.IdAlumno });
@@ -43,7 +45,144 @@ namespace UA.Controllers
             return View(model);
         }
 
-        [HttpGet]
+        private void ValidarYaInscripto(InscripcionViewModel model)
+        {
+            bool materiaNoExiste = false;
+            //filtro inscripciones del alumno
+            List<Inscripcion> inscripciones = db.Inscripcion.Where(d => d.IdAlumno == model.IdAlumno).ToList();
+
+            foreach (Inscripcion inscripcion in inscripciones)
+            {
+                if (model.IDMateria == inscripcion.IDMateria.Trim() && (inscripcion.Nota > 3 || inscripcion.Nota == 0))
+                {
+                    materiaNoExiste = true;
+                }
+            }
+            if (materiaNoExiste == true)
+            {
+                ModelState.AddModelError(nameof(model.IDMateria), "La inscripciona esta Materia ya existe");
+            }
+        }
+
+        private void ValidarMateriaExiste(InscripcionViewModel model)
+        {
+            bool materiaExiste = false;
+            List<MateriaC> materias = db.Materias.ToList();
+            foreach (MateriaC materia in materias)
+            {
+                if (model.IDMateria == materia.ID.Trim())
+                {
+                    materiaExiste = true;
+                }
+            }
+            if (materiaExiste == false)
+            {
+                ModelState.AddModelError(nameof(model.IDMateria), "La Materia no existe");
+            }
+        }
+
+        private void Validar7materias(InscripcionViewModel model)
+        {
+            int materia7 = 0;
+            //filtro inscripciones del alumno
+            List<Inscripcion> inscripciones = db.Inscripcion.Where(d => d.IdAlumno == model.IdAlumno).ToList();
+
+            foreach (Inscripcion inscripcion in inscripciones)
+            {
+                if (inscripcion.Nota == 0)
+                {
+                    materia7++;
+                }
+            }
+            if (materia7 >= 7)
+            {
+                ModelState.AddModelError(nameof(model.IDMateria), "El número máximo de inscripciones es siete.");
+            }
+        }
+
+        private void ValidarCorrelativa1(InscripcionViewModel model)
+        {
+            bool correlativaAprovada1 = false;
+            MateriaC materia = db.Materias.First(i => i.ID == model.IDMateria);
+
+            if (materia.IDcorrelativa1 != null)
+            {
+                MateriaC correlativa1 = db.Materias.First(i => i.ID == materia.IDcorrelativa1);
+                MateriaC correlativa2 = db.Materias.First(i => i.ID == materia.IDcorrelativa2);
+
+                //filtro inscripciones del alumno
+                List<Inscripcion> inscripciones = db.Inscripcion.Where(d => d.IdAlumno == model.IdAlumno).ToList();
+                
+                    foreach (Inscripcion inscripcion in inscripciones)
+                    {
+                        if (inscripcion.IDMateria == correlativa1.ID && inscripcion.Nota > 3)
+                        {
+                            correlativaAprovada1 = true;
+                        }
+                    }
+
+                    if (correlativaAprovada1 == false)
+                    {
+                        ModelState.AddModelError(nameof(model.IDMateria), $"Falta aprobar {correlativa1.Materia} y {correlativa2.Materia}");
+                    }
+            }
+        }
+
+        private void ValidarCorrelativa2(InscripcionViewModel model)
+        {
+            bool correlativaAprovada2 = false;
+            MateriaC materia = db.Materias.First(i => i.ID == model.IDMateria);
+            if (materia.IDcorrelativa2 != null)
+            {
+                MateriaC correlativa1 = db.Materias.First(i => i.ID == materia.IDcorrelativa1);
+                MateriaC correlativa2 = db.Materias.First(i => i.ID == materia.IDcorrelativa2);
+
+                //filtro inscripciones del alumno
+                List<Inscripcion> inscripciones = db.Inscripcion.Where(d => d.IdAlumno == model.IdAlumno).ToList();
+
+                foreach (Inscripcion inscripcion in inscripciones)
+                {
+                    if (inscripcion.IDMateria == correlativa2.ID && inscripcion.Nota > 3)
+                    {
+                        correlativaAprovada2 = true;
+                    }
+                }
+
+                if (correlativaAprovada2 == false)
+                {
+                    ModelState.AddModelError(nameof(model.IDMateria), $"Falta aprobar {correlativa1.Materia} y {correlativa2.Materia}");
+                }
+            }
+        }
+
+        /*private void ValidarCorrelativas(InscripcionViewModel model)
+        {
+            if (ValidarCorrelativa1(model)== T)
+            {
+
+            }
+
+        }
+*/
+            /*private void ValidarCarrera(MateriaViewModel model)
+            {
+                bool carreraExiste = false;
+                List<CarreraC> carreras = db.Carreras.ToList();
+                foreach (CarreraC carrera in carreras)
+                {
+                    if (model.IDcarrera == carrera.ID.Trim())
+                    {
+                        carreraExiste = true;
+                    }
+                }
+                if (carreraExiste != true)
+                {
+                    ModelState.AddModelError(nameof(model.IDcarrera), "La carrera no existe");
+                }
+            }*/
+
+
+            [HttpGet]
         public ActionResult LogIn()
         {
             return View(new LogInViewModel());
