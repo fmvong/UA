@@ -9,16 +9,34 @@
             <th>ID</th>
             <th>Fecha</th>
             <th>Nota</th>
+            <th>Estado</th>
             <th>Cancelar</th>
         </tr>
         @foreach (var inscripcion in Model)
         {
-            <tr>
-                <td>@inscripcion.IDMateria</td>
-                <td>@inscripcion.Fecha</td>
-                <td>@inscripcion.Nota</td>
-                <td><a href='@string.Format("https://localhost:44321/Alumno/CancelarIns/{0}", inscripcion.Id)' class="btn btn-lg">Sí</a></td>
-            </tr>
+    <tr>
+        <td>@inscripcion.IDMateria</td>
+        <td>@inscripcion.Fecha</td>
+        <td>@inscripcion.Nota</td>
+        @if (inscripcion.Nota > 4)
+        {
+            <td>Aprobado</td>
+        }
+        else if (inscripcion.Nota < 4 && inscripcion.Nota > 0)
+        {
+            <td>Desaprobado</td>
+        }
+        else if (inscripcion.Nota == 0)
+        {
+            <td>Cursando</td>
+        }
+        else if (inscripcion.Nota == -1)
+        {
+            <td>Ausente</td>
+        }
+
+        <td><a href='@string.Format("https://localhost:44321/Alumno/CancelarIns/{0}", inscripcion.Id)' class="btn btn-lg">Sí</a></td>
+    </tr>
         }
     </table>
 

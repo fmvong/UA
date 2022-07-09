@@ -261,7 +261,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Alumno\CrearAlu.cshtml" />
     <Content Include="Views\Alumno\MateriasAlu.cshtml" />
-    <Content Include="Views\Alumno\ShowAlu.cshtml" />
     <Content Include="Views\Alumno\CreacionAluExitosa.cshtml" />
     <Content Include="Views\Alumno\LogIn.cshtml" />
     <Content Include="Views\Admin\index.cshtml" />
@@ -272,6 +271,7 @@
     <Content Include="Views\Profesor\VerExamenes.cshtml" />
     <Content Include="Views\Alumno\CancelarIns.cshtml" />
     <Content Include="Views\Profesor\Index.cshtml" />
+    <Content Include="Views\Profesor\AsignarNota.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

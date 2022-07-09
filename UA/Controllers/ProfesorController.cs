@@ -13,26 +13,26 @@ namespace UA.Controllers
 
         public ActionResult AsignarNota(Guid id)
         {
-            //List<Inscripcion> listaId = new List<Inscripcion>();
-            //Inscripcion inscripcion = new Inscripcion();
-            Inscripcion inscripcion = db.Inscripcion.First(i => i.Id == id);
-            inscripcion.Id = id;
-            //listaId.Add(a);
-
-            //List<Inscripcion> materias = new List<Inscripcion>();
-            //materias = db.Inscripcion.Where(i => i.Id == id).ToList();
-            return View(inscripcion);
+            //Inscripcion inscripcion = db.Inscripcion.First(i => i.Id == id);
+            NotaViewModel examen = new NotaViewModel { Id = id, Fecha = "6", Nota = 6 };
+            return View(examen);
 
             //return View(new NotaViewModel());
         }
+
         [HttpPost]
-        public ActionResult AsignarNota(NotaViewModel materiaid)
+        public ActionResult AsignarNota(NotaViewModel examen) 
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("VerExamenes", new { id = materiaid.Id });
+                Inscripcion inscripcion = db.Inscripcion.First(i => i.Id == examen.Id);
+                inscripcion.Fecha = examen.Fecha;
+                inscripcion.Nota = examen.Nota;
+                db.SaveChanges();
+
+                return RedirectToAction("VerExamenes", new { id = inscripcion.IDMateria.Trim() });
             }
-            return View(materiaid);
+            return View(examen);
         }
 
         // GET: Profesor
@@ -53,17 +53,17 @@ namespace UA.Controllers
         [HttpGet]
         public ActionResult VerExamenes(string id)
         {
-            List<Inscripcion> listaId = new List<Inscripcion>();
+            /*List<Inscripcion> listaId = new List<Inscripcion>();
             Inscripcion a = new Inscripcion();
             a.IDMateria = id;
-            listaId.Add(a);
+            listaId.Add(a);*/
 
             List<Inscripcion> materias = new List<Inscripcion>();
             materias = db.Inscripcion.Where(i => i.IDMateria == id).ToList();
             return View(materias);
         }
 
-        [HttpPost]
+        /*[HttpPost]
         public ActionResult VerExamenes(List<MateriaC> materiasId)
         {
             string id = materiasId[0].ID;
@@ -79,7 +79,7 @@ namespace UA.Controllers
             }
 
             return View(materiasfiltro);
-        }
+        }*/
 
         
     }

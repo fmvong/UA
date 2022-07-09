@@ -34,6 +34,7 @@ namespace UA.Controllers
             {
                 //var db = new ApplicationDbContext();
                 //model.Id = Guid.NewGuid();
+                //ValidarCorrelativa(model);
                 db.Inscripcion.Add(model.AgregarId());
                 db.SaveChanges();
                 return RedirectToAction("MateriasAlu", new { id = model.IdAlumno });
@@ -46,26 +47,6 @@ namespace UA.Controllers
         public ActionResult LogIn()
         {
             return View(new LogInViewModel());
-
-
-            /*List<Inscripcion> listaId = new List<Inscripcion>();
-            Inscripcion a = new Inscripcion();
-            a.IdAlumno = 8;
-            listaId.Add(a);
-
-            int id = listaId[0].IdAlumno;
-            List<Inscripcion> materias = new List<Inscripcion>();
-            List<Inscripcion> materiasAlu = new List<Inscripcion>();
-            materias = db.Inscripcion.ToList();
-            foreach (Inscripcion materia in materias)
-            {
-                if (materia.IdAlumno == id)
-                {
-                    materiasAlu.Add(materia);
-                }
-            }
-
-            return View(materiasAlu);*/
         }
 
         [HttpPost]
@@ -74,21 +55,6 @@ namespace UA.Controllers
             if (ModelState.IsValid)
             {
                 return RedirectToAction("MateriasAlu", new { id = logIn.Id });
-
-                /*int id = list[0].IdAlumno;
-                List<Inscripcion> materias = new List<Inscripcion>();
-                List<Inscripcion> materiasAlu = new List<Inscripcion>();
-                materias = db.Inscripcion.ToList();
-                foreach (Inscripcion materia in materias)
-                {
-                    if (materia.IdAlumno == id)
-                    {
-                        materiasAlu.Add(materia);
-                    }
-                }
-
-                return View(materiasAlu);*/
-                //
             }
             return View(logIn);
         }
@@ -186,14 +152,6 @@ namespace UA.Controllers
 
         //Ejemplo de validacion. No funciona para nuevas Carreras
 
-        public ActionResult ShowAlu()
-        {
-
-            List<Alumno> alumnos = db.Alumnos.ToList();
-
-            return View(alumnos);
-        }
-
         private void ValidarRegistro(AlumnoViewModel model)
         {
             if (model.IDcarrera!="A1"&& model.IDcarrera != "D2" && model.IDcarrera != "G3" && model.IDcarrera != "I4" && model.IDcarrera != "P5")
@@ -201,5 +159,25 @@ namespace UA.Controllers
                 ModelState.AddModelError(nameof(model.IDcarrera), "La carrera no es valida");
             }
         }
+
+        /*private bool ValidarInscripcion(InscripcionViewModel model)
+        {
+            bool carreravalida = false;
+
+            List<CarreraC> carreras = db.Carreras.ToList();
+            foreach (CarreraC carrera in carreras)
+            {
+                if (model.IDcarrera == carrera.ID)
+                {
+                    carreravalida = true;
+
+                }
+            }
+            if (carreravalida != true)
+            {
+                ModelState.AddModelError(nameof(model.IDcarrera), "La carrera no es valida");
+            }
+            return carreravalida;
+        }*/
     }
 }

@@ -13,7 +13,7 @@
         <!--<button class="boton-switch">Mostrar</button>
     </form>-->
     <br />
-    <table>
+    <table class="table table-striped">
         <tr>
             <th>ID del Alumno</th>
             <th>ID de la Materia</th>
@@ -28,7 +28,7 @@
         <td>@inscripcion.Fecha</td>
         @if (inscripcion.Nota == 0)
         {
-            <td><a href='@string.Format("https://localhost:44321/Profesor/AsignarNota", inscripcion.Id)' class="btn btn-lg">Asignar</a></td>
+            <td><a href='@string.Format("https://localhost:44321/Profesor/AsignarNota/{0}", inscripcion.Id)' class="btn btn-lg">Asignar</a></td>
         }
         else
         {

@@ -23,16 +23,64 @@ namespace UA.Controllers
         [HttpPost]
         public ActionResult CargaMateria(MateriaViewModel model)
         {
+            ValidarCarrera(model);
+
             if (ModelState.IsValid)
             {
-                var db = new ApplicationDbContext();
-                db.Materias.Add(new MateriaC { ID = model.ID, Materia = model.Materia, IDcarrera = model.IDcarrera, IDcorrelativa1 = model.IDcorrelativa1, IDcorrelativa2 = model.IDcorrelativa2, Semestre = model.Semestre});
+                
+
+                //if (ValidarMateria(model) && ValidarCarrera(model)) {
+
+                //if (ValidarCarrera(model)) {
+                db.Materias.Add(new MateriaC { ID = model.ID, Materia = model.Materia, IDcarrera = model.IDcarrera, IDcorrelativa1 = model.IDcorrelativa1, IDcorrelativa2 = model.IDcorrelativa2, Semestre = model.Semestre });
                 db.SaveChanges();
 
                 return RedirectToAction("ExitoRegMateria", new { nombre = model.Materia });
+                //}
             }
             return View(model);
         }
+
+        private void ValidarCarrera(MateriaViewModel model)
+        {
+            bool carreraExiste = false;
+            List<CarreraC> carreras = db.Carreras.ToList();
+            foreach (CarreraC carrera in carreras)
+            {
+
+                if (model.IDcarrera == carrera.ID)
+                {
+                    carreraExiste=true;
+                }
+            }
+            if (carreraExiste != true)
+            {
+                ModelState.AddModelError(nameof(model.IDcarrera), "La carrera no existe");
+            }
+            //return (carreraExiste);
+        }
+
+        /*private bool ValidarMateria(MateriaViewModel model)
+        {
+            bool materiaNoExiste = false;
+            List<MateriaC> materias = db.Materias.ToList();
+            foreach (MateriaC materia in materias)
+            {
+                if (model.ID == materia.ID)
+                {
+                    materiaNoExiste = true;
+                }
+
+            }
+            if (materiaNoExiste != true)
+            {
+                ModelState.AddModelError(nameof(model.ID), "La materia ya existe");
+            }
+
+            return (materiaNoExiste);
+        }*/
+
+
 
         public ActionResult index()
         {
