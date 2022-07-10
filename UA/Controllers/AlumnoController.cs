@@ -33,8 +33,9 @@ namespace UA.Controllers
             ValidarYaInscripto(model);
             ValidarMateriaExiste(model);
             Validar7materias(model);
-            ValidarCorrelativa1(model);
-            ValidarCorrelativa2(model);
+            //ValidarCorrelativa1(model);
+            //ValidarCorrelativa2(model);
+            ValidarCorrelativas(model);
             if (ModelState.IsValid)
             {
                 db.Inscripcion.Add(model.AgregarId());
@@ -100,7 +101,7 @@ namespace UA.Controllers
             }
         }
 
-        private void ValidarCorrelativa1(InscripcionViewModel model)
+        private bool ValidarCorrelativa1(InscripcionViewModel model)
         {
             bool correlativaAprovada1 = false;
             MateriaC materia = db.Materias.First(i => i.ID == model.IDMateria);
@@ -108,7 +109,7 @@ namespace UA.Controllers
             if (materia.IDcorrelativa1 != null)
             {
                 MateriaC correlativa1 = db.Materias.First(i => i.ID == materia.IDcorrelativa1);
-                MateriaC correlativa2 = db.Materias.First(i => i.ID == materia.IDcorrelativa2);
+                //MateriaC correlativa2 = db.Materias.First(i => i.ID == materia.IDcorrelativa2);
 
                 //filtro inscripciones del alumno
                 List<Inscripcion> inscripciones = db.Inscripcion.Where(d => d.IdAlumno == model.IdAlumno).ToList();
@@ -120,21 +121,22 @@ namespace UA.Controllers
                             correlativaAprovada1 = true;
                         }
                     }
-
-                    if (correlativaAprovada1 == false)
+                    return correlativaAprovada1;
+                    /*if (correlativaAprovada1 == false)
                     {
                         ModelState.AddModelError(nameof(model.IDMateria), $"Falta aprobar {correlativa1.Materia} y {correlativa2.Materia}");
-                    }
+                    }*/
             }
+            return correlativaAprovada1;
         }
 
-        private void ValidarCorrelativa2(InscripcionViewModel model)
+        private bool ValidarCorrelativa2(InscripcionViewModel model)
         {
             bool correlativaAprovada2 = false;
             MateriaC materia = db.Materias.First(i => i.ID == model.IDMateria);
             if (materia.IDcorrelativa2 != null)
             {
-                MateriaC correlativa1 = db.Materias.First(i => i.ID == materia.IDcorrelativa1);
+                //MateriaC correlativa1 = db.Materias.First(i => i.ID == materia.IDcorrelativa1);
                 MateriaC correlativa2 = db.Materias.First(i => i.ID == materia.IDcorrelativa2);
 
                 //filtro inscripciones del alumno
@@ -148,41 +150,86 @@ namespace UA.Controllers
                     }
                 }
 
-                if (correlativaAprovada2 == false)
+                return correlativaAprovada2;
+                /*if (correlativaAprovada2 == false)
                 {
                     ModelState.AddModelError(nameof(model.IDMateria), $"Falta aprobar {correlativa1.Materia} y {correlativa2.Materia}");
-                }
+                }*/
             }
+            return correlativaAprovada2;
         }
-
-        /*private void ValidarCorrelativas(InscripcionViewModel model)
+        public void ValidarCorrelativasx(InscripcionViewModel model)
         {
-            if (ValidarCorrelativa1(model)== T)
-            {
+            //ValidarCorrelativa1(model);
+            //ValidarCorrelativa2(model);
 
-            }
-
+            MateriaC materia = db.Materias.First(i => i.ID == model.IDMateria);
+            /*if (materia.IDcorrelativa2 != null && materia.IDcorrelativa1 != null)
+            {*/
+                if (ValidarCorrelativa1(model) == false && ValidarCorrelativa2(model) == false)
+                {
+                    MateriaC correlativa2 = db.Materias.First(i => i.ID == materia.IDcorrelativa2);
+                    MateriaC correlativa1 = db.Materias.First(i => i.ID == materia.IDcorrelativa1);
+                    ModelState.AddModelError(nameof(model.IDMateria), $"Falta aprobar {correlativa1.Materia} y {correlativa2.Materia}");
+                }
+                else if (ValidarCorrelativa1(model) == false)
+                {
+                MateriaC correlativa1 = db.Materias.First(i => i.ID == materia.IDcorrelativa1);
+                ModelState.AddModelError(nameof(model.IDMateria), $"Falta aprobar {correlativa1.Materia}");
+                }
+                else if (ValidarCorrelativa2(model) == false)
+                {
+                MateriaC correlativa2 = db.Materias.First(i => i.ID == materia.IDcorrelativa2);
+                ModelState.AddModelError(nameof(model.IDMateria), $"Falta aprobar {correlativa2.Materia}");
+                }
+            //}
         }
-*/
-            /*private void ValidarCarrera(MateriaViewModel model)
+
+        public void ValidarCorrelativas(InscripcionViewModel model)
+        {
+            MateriaC materia = db.Materias.First(i => i.ID == model.IDMateria);
+            /*if (materia.IDcorrelativa2 != null && materia.IDcorrelativa1 != null)
+            {*/
+            if (materia.IDcorrelativa1 != null && materia.IDcorrelativa2 != null && ValidarCorrelativa1(model) == false && ValidarCorrelativa2(model) == false)
             {
-                bool carreraExiste = false;
-                List<CarreraC> carreras = db.Carreras.ToList();
-                foreach (CarreraC carrera in carreras)
-                {
-                    if (model.IDcarrera == carrera.ID.Trim())
-                    {
-                        carreraExiste = true;
-                    }
-                }
-                if (carreraExiste != true)
-                {
-                    ModelState.AddModelError(nameof(model.IDcarrera), "La carrera no existe");
-                }
-            }*/
+                MateriaC correlativa2 = db.Materias.First(i => i.ID == materia.IDcorrelativa2);
+                MateriaC correlativa1 = db.Materias.First(i => i.ID == materia.IDcorrelativa1);
+                ModelState.AddModelError(nameof(model.IDMateria), $"Falta aprobar {correlativa1.Materia} y {correlativa2.Materia}");
+            }
+            else if (materia.IDcorrelativa1 != null && ValidarCorrelativa1(model) == false)
+            {
+                MateriaC correlativa1 = db.Materias.First(i => i.ID == materia.IDcorrelativa1);
+                ModelState.AddModelError(nameof(model.IDMateria), $"Falta aprobar {correlativa1.Materia}");
+            }
+            else if (materia.IDcorrelativa2 != null && ValidarCorrelativa2(model) == false)
+            {
+                MateriaC correlativa2 = db.Materias.First(i => i.ID == materia.IDcorrelativa2);
+                ModelState.AddModelError(nameof(model.IDMateria), $"Falta aprobar {correlativa2.Materia}");
+            }
+            //}
+        }
 
 
-            [HttpGet]
+
+        /*private void ValidarCarrera(MateriaViewModel model)
+        {
+            bool carreraExiste = false;
+            List<CarreraC> carreras = db.Carreras.ToList();
+            foreach (CarreraC carrera in carreras)
+            {
+                if (model.IDcarrera == carrera.ID.Trim())
+                {
+                    carreraExiste = true;
+                }
+            }
+            if (carreraExiste != true)
+            {
+                ModelState.AddModelError(nameof(model.IDcarrera), "La carrera no existe");
+            }
+        }*/
+
+
+        [HttpGet]
         public ActionResult LogIn()
         {
             return View(new LogInViewModel());
@@ -298,25 +345,5 @@ namespace UA.Controllers
                 ModelState.AddModelError(nameof(model.IDcarrera), "La carrera no es valida");
             }
         }
-
-        /*private bool ValidarInscripcion(InscripcionViewModel model)
-        {
-            bool carreravalida = false;
-
-            List<CarreraC> carreras = db.Carreras.ToList();
-            foreach (CarreraC carrera in carreras)
-            {
-                if (model.IDcarrera == carrera.ID)
-                {
-                    carreravalida = true;
-
-                }
-            }
-            if (carreravalida != true)
-            {
-                ModelState.AddModelError(nameof(model.IDcarrera), "La carrera no es valida");
-            }
-            return carreravalida;
-        }*/
     }
 }
