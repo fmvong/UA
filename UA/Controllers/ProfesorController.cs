@@ -14,7 +14,7 @@ namespace UA.Controllers
         public ActionResult AsignarNota(Guid id)
         {
             //Inscripcion inscripcion = db.Inscripcion.First(i => i.Id == id);
-            NotaViewModel examen = new NotaViewModel { Id = id, Fecha = "6", Nota = 6 };
+            NotaViewModel examen = new NotaViewModel { Id = id, Fecha = "07/06/2022", Nota = 6 };
             return View(examen);
 
             //return View(new NotaViewModel());

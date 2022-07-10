@@ -1,0 +1,43 @@
+﻿
+@model List<UA.Models.Inscripcion>
+
+<h1>Materias Rendidas</h1>
+
+<div>
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Nota</th>
+            <th>Estado</th>
+        </tr>
+        @foreach (var inscripcion in Model)
+        {
+    <tr>
+        <td>@inscripcion.IDMateria</td>
+        <td>@inscripcion.Fecha</td>
+        <td>@inscripcion.Nota</td>
+        @if (inscripcion.Nota > 4)
+        {
+            <td>Aprobado</td>
+        }
+        else if (inscripcion.Nota < 4 && inscripcion.Nota > 0)
+        {
+            <td>Desaprobado</td>
+        }
+        else if (inscripcion.Nota == 0)
+        {
+            <td>Cursando</td>
+        }
+        else if (inscripcion.Nota == -1)
+        {
+            <td>Ausente</td>
+        }
+    </tr>
+        }
+    </table>
+
+</div>
+<br />
+@*<p><a href="https://localhost:44321/Alumno/CrearAlu" class="btn btn-lg">Volver</a></p>*@
+<p><a href='@string.Format("https://localhost:44321/Alumno/MateriasAlu/{0}", Model[0].IdAlumno)' , class="btn btn-lg">Volver</a></p>

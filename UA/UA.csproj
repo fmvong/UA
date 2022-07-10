@@ -272,6 +272,8 @@
     <Content Include="Views\Alumno\CancelarIns.cshtml" />
     <Content Include="Views\Profesor\Index.cshtml" />
     <Content Include="Views\Profesor\AsignarNota.cshtml" />
+    <Content Include="Views\Alumno\MateriasAprobadas.cshtml" />
+    <Content Include="Views\Alumno\MateriasRendidas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

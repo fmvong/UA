@@ -15,6 +15,8 @@ namespace UA.Models
         {
             this.IdAlumno = inscripcion.IdAlumno;
             this.IDMateria = inscripcion.IDMateria;
+            this.Fecha = inscripcion.Fecha;
+            this.Nota = inscripcion.Nota;
         }
         #endregion
 
@@ -26,8 +28,12 @@ namespace UA.Models
         [Required(ErrorMessage = "Debe cargar Id de la Materia")]
         public string IDMateria { get; set; }
 
+        public string Fecha { get; set; }
+
+        public int Nota { get; set; }
+
         #region Methods
-        
+
         #endregion
         public Inscripcion AgregarId()
         {
@@ -35,7 +41,7 @@ namespace UA.Models
             {
                 IdAlumno = this.IdAlumno,
                 IDMateria = this.IDMateria,
-                Fecha = " ",
+                //Fecha = " ",
                 //Nota = null,
                 Id = Guid.NewGuid(),
             };

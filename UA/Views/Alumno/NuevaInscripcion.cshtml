@@ -5,9 +5,9 @@
 @*<p>@ViewBag.Message</p>*@
 <div>
     <form action="/Alumno/NuevaInscripcion" method="POST">
-        <label for="IdAlumno">ID alumno</label><br />
-        <input class="form-control" type="text" id="IdAlumno" name="IdAlumno" value="@Model.IdAlumno" />
-        <span style="color:red">@Html.ValidationMessageFor(m => m.IdAlumno)</span><br />
+        @*<label for="IdAlumno">ID alumno</label><br />*@
+        <input class="form-control" id="IdAlumno" name="IdAlumno" value="@Model.IdAlumno" type="hidden"/>
+        @*<span style="color:red">@Html.ValidationMessageFor(m => m.IdAlumno)</span><br />*@
 
         <label for="IDMateria">Id de Materia</label><br />
         <input class="form-control" type="text" id="IDMateria" name="IDMateria" value="@Model.IDMateria" />

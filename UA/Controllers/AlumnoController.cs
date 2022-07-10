@@ -13,6 +13,32 @@ namespace UA.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         [HttpGet]
+        public ActionResult MateriasRendidas(int id)
+        {
+            /*List<Inscripcion> listaId = new List<Inscripcion>();
+            Inscripcion a = new Inscripcion();
+            a.IdAlumno = id;
+            listaId.Add(a);*/
+
+            List<Inscripcion> materias = new List<Inscripcion>();
+            materias = db.Inscripcion.Where(i => i.IdAlumno == id && i.Nota > 0).ToList();
+            return View(materias);
+        }
+
+        [HttpGet]
+        public ActionResult MateriasAprobadas(int id)
+        {
+            /*List<Inscripcion> listaId = new List<Inscripcion>();
+            Inscripcion a = new Inscripcion();
+            a.IdAlumno = id;
+            listaId.Add(a);*/
+
+            List<Inscripcion> materias = new List<Inscripcion>();
+            materias = db.Inscripcion.Where(i => i.IdAlumno == id && i.Nota > 3).ToList();
+            return View(materias);
+        }
+
+        [HttpGet]
         public ActionResult CancelarIns(Guid id)
         {
             Inscripcion inscripcion = db.Inscripcion.First(i => i.Id == id);
@@ -22,9 +48,11 @@ namespace UA.Controllers
         }
 
         [HttpGet]
-        public ActionResult NuevaInscripcion()
+        public ActionResult NuevaInscripcion(int id)
         {
-            return View(new InscripcionViewModel());
+            Inscripcion inscripcion = db.Inscripcion.First(i => i.IdAlumno == id);
+            InscripcionViewModel model = new InscripcionViewModel { IdAlumno = id };
+            return View(model);
         }
 
         [HttpPost]
@@ -158,14 +186,14 @@ namespace UA.Controllers
             }
             return correlativaAprovada2;
         }
-        public void ValidarCorrelativasx(InscripcionViewModel model)
+        /*public void ValidarCorrelativasx(InscripcionViewModel model)
         {
             //ValidarCorrelativa1(model);
             //ValidarCorrelativa2(model);
 
             MateriaC materia = db.Materias.First(i => i.ID == model.IDMateria);
-            /*if (materia.IDcorrelativa2 != null && materia.IDcorrelativa1 != null)
-            {*/
+            *//*if (materia.IDcorrelativa2 != null && materia.IDcorrelativa1 != null)
+            {*//*
                 if (ValidarCorrelativa1(model) == false && ValidarCorrelativa2(model) == false)
                 {
                     MateriaC correlativa2 = db.Materias.First(i => i.ID == materia.IDcorrelativa2);
@@ -183,7 +211,7 @@ namespace UA.Controllers
                 ModelState.AddModelError(nameof(model.IDMateria), $"Falta aprobar {correlativa2.Materia}");
                 }
             //}
-        }
+        }*/
 
         public void ValidarCorrelativas(InscripcionViewModel model)
         {
@@ -248,18 +276,19 @@ namespace UA.Controllers
         [HttpGet]
         public ActionResult MateriasAlu(int id)
         {
-            List<Inscripcion> listaId = new List<Inscripcion>();
-            Inscripcion a = new Inscripcion();
+            /*List<InscripcionViewModel> listaId = new List<InscripcionViewModel>();
+            InscripcionViewModel a = new InscripcionViewModel();
             a.IdAlumno = id;
-            listaId.Add(a);
+            listaId.Add(a);*/
 
             List<Inscripcion> materias = new List<Inscripcion>();
             materias = db.Inscripcion.Where(i => i.IdAlumno == id).ToList();
             return View(materias);
+
         }
 
 
-        [HttpPost]
+        /*[HttpPost]
         public ActionResult MateriasAlu(List<Inscripcion> listaId)
         {
             int id = listaId[0].IdAlumno;
@@ -275,7 +304,7 @@ namespace UA.Controllers
             }
 
             return View(materiasAlu);
-        }
+        }*/
 
         [HttpGet]
         public ActionResult CrearAlu()

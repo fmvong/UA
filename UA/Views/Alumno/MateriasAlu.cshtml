@@ -14,34 +14,38 @@
         </tr>
         @foreach (var inscripcion in Model)
         {
-    <tr>
-        <td>@inscripcion.IDMateria</td>
-        <td>@inscripcion.Fecha</td>
-        <td>@inscripcion.Nota</td>
-        @if (inscripcion.Nota > 4)
-        {
-            <td>Aprobado</td>
-        }
-        else if (inscripcion.Nota < 4 && inscripcion.Nota > 0)
-        {
-            <td>Desaprobado</td>
-        }
-        else if (inscripcion.Nota == 0)
-        {
-            <td>Cursando</td>
-        }
-        else if (inscripcion.Nota == -1)
-        {
-            <td>Ausente</td>
-        }
+            <tr>
+                <td>@inscripcion.IDMateria</td>
+                <td>@inscripcion.Fecha</td>
+                <td>@inscripcion.Nota</td>
+                @if (inscripcion.Nota > 4)
+                {
+                    <td>Aprobado</td>
+                }
+                else if (inscripcion.Nota < 4 && inscripcion.Nota > 0)
+                {
+                    <td>Desaprobado</td>
+                }
+                else if (inscripcion.Nota == 0)
+                {
+                    <td>Cursando</td>
+                }
+                else if (inscripcion.Nota == -1)
+                {
+                    <td>Ausente</td>
+                }
 
-        <td><a href='@string.Format("https://localhost:44321/Alumno/CancelarIns/{0}", inscripcion.Id)' class="btn btn-lg">Sí</a></td>
-    </tr>
+                <td><a href='@string.Format("https://localhost:44321/Alumno/CancelarIns/{0}", inscripcion.Id)' class="btn btn-lg">Sí</a></td>
+            </tr>
         }
     </table>
 
 </div>
 <br />
-<p><a href="https://localhost:44321/Alumno/NuevaInscripcion" class="btn btn-lg">Inscribirse</a></p>
+<p><a href='@string.Format("https://localhost:44321/Alumno/NuevaInscripcion/{0}", Model[0].IdAlumno)' class="btn btn-lg">Inscribirse</a></p>
+<br />
+<p><a href='@string.Format("https://localhost:44321/Alumno/MateriasAprobadas/{0}", Model[0].IdAlumno)' , class="btn btn-lg">Materias Aprobadas</a></p>
+<br />
+<p><a href='@string.Format("https://localhost:44321/Alumno/MateriasRendidas/{0}", Model[0].IdAlumno)' , class="btn btn-lg">Materias Rendidas</a></p>
 <br />
 <p><a href="https://localhost:44321/Alumno/CrearAlu" class="btn btn-lg">Volver</a></p>
