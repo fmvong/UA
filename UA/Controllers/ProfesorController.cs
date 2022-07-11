@@ -53,14 +53,20 @@ namespace UA.Controllers
         [HttpGet]
         public ActionResult VerExamenes(string id)
         {
-            /*List<Inscripcion> listaId = new List<Inscripcion>();
-            Inscripcion a = new Inscripcion();
-            a.IDMateria = id;
-            listaId.Add(a);*/
-
             List<Inscripcion> materias = new List<Inscripcion>();
             materias = db.Inscripcion.Where(i => i.IDMateria == id).ToList();
-            return View(materias);
+            List<ReporteViewModel> reporte = new List<ReporteViewModel>();
+            foreach (Inscripcion materia in materias)
+            {
+                ReporteViewModel reporteModel = new ReporteViewModel(materia);
+
+                reporteModel.Materia = db.Materias.First(i => i.ID == materia.IDMateria).Materia;
+                reporteModel.Nombre = db.Alumnos.First(i => i.ID == materia.IdAlumno).Nombre;
+                reporteModel.Apellido = db.Alumnos.First(i => i.ID == materia.IdAlumno).Apellido;
+
+                reporte.Add(reporteModel);
+            }
+            return View(reporte);
         }
 
         /*[HttpPost]

@@ -25,9 +25,10 @@ namespace UA.Models
         
         [Required(ErrorMessage = "Debe cargar su Id")]
         public int IdAlumno { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
         [Required(ErrorMessage = "Debe cargar Id de la Materia")]
         public string IDMateria { get; set; }
-
         public string Materia { get; set; }
         public string Fecha { get; set; }
         public int Nota { get; set; }

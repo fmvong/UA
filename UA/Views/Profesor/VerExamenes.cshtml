@@ -1,5 +1,5 @@
 ﻿
-@model List<UA.Models.Inscripcion>
+@model List<UA.Models.ReporteViewModel>
 
 <h1>Materias</h1>
 <p>@ViewBag.Message</p>
@@ -8,15 +8,17 @@
     <!--<form action="/Profesor/VerExamenes" method="POST">
         <label for="Nombre">Nombre</label><br />
         <input class="form-control" type="text" id="Nombre" name="Nombre" value="" />-->
-        @*<span style="color:red">@Html.ValidationMessageFor(m => m.Nombre)</span><br />*@
+    @*<span style="color:red">@Html.ValidationMessageFor(m => m.Nombre)</span><br />*@
 
-        <!--<button class="boton-switch">Mostrar</button>
+    <!--<button class="boton-switch">Mostrar</button>
     </form>-->
     <br />
     <table class="table table-striped">
         <tr>
             <th>ID del Alumno</th>
+            <th>Alumno</th>
             <th>ID de la Materia</th>
+            <th>Materia</th>
             <th>Fecha</th>
             <th>Nota</th>
         </tr>
@@ -24,7 +26,9 @@
         {
     <tr>
         <td>@inscripcion.IdAlumno</td>
+        <td>@inscripcion.Nombre @inscripcion.Apellido</td>
         <td>@inscripcion.IDMateria</td>
+        <td>@inscripcion.Materia</td>
         <td>@inscripcion.Fecha</td>
         @if (inscripcion.Nota == 0)
         {
