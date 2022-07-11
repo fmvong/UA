@@ -1,5 +1,5 @@
 ﻿
-@model List<UA.Models.Inscripcion>
+@model List<UA.Models.ReporteViewModel>
 
 <h1>Materias</h1>
 
@@ -7,6 +7,7 @@
     <table class="table table-striped">
         <tr>
             <th>ID</th>
+            <th>Materia</th>
             <th>Fecha</th>
             <th>Nota</th>
             <th>Estado</th>
@@ -16,6 +17,7 @@
         {
             <tr>
                 <td>@inscripcion.IDMateria</td>
+                <td>@inscripcion.Materia</td>
                 <td>@inscripcion.Fecha</td>
                 <td>@inscripcion.Nota</td>
                 @if (inscripcion.Nota > 4)

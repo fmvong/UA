@@ -1,5 +1,5 @@
 ﻿
-@model List<UA.Models.Inscripcion>
+@model List<UA.Models.ReporteViewModel>
 
 <h1>Materias Rendidas</h1>
 
@@ -7,33 +7,35 @@
     <table class="table table-striped">
         <tr>
             <th>ID</th>
+            <th>Materia</th>
             <th>Fecha</th>
             <th>Nota</th>
             <th>Estado</th>
         </tr>
         @foreach (var inscripcion in Model)
         {
-    <tr>
-        <td>@inscripcion.IDMateria</td>
-        <td>@inscripcion.Fecha</td>
-        <td>@inscripcion.Nota</td>
-        @if (inscripcion.Nota > 4)
-        {
-            <td>Aprobado</td>
-        }
-        else if (inscripcion.Nota < 4 && inscripcion.Nota > 0)
-        {
-            <td>Desaprobado</td>
-        }
-        else if (inscripcion.Nota == 0)
-        {
-            <td>Cursando</td>
-        }
-        else if (inscripcion.Nota == -1)
-        {
-            <td>Ausente</td>
-        }
-    </tr>
+            <tr>
+                <td>@inscripcion.IDMateria</td>
+                <td>@inscripcion.Materia</td>
+                <td>@inscripcion.Fecha</td>
+                <td>@inscripcion.Nota</td>
+                @if (inscripcion.Nota > 4)
+                {
+                    <td>Aprobado</td>
+                }
+                else if (inscripcion.Nota < 4 && inscripcion.Nota > 0)
+                {
+                    <td>Desaprobado</td>
+                }
+                else if (inscripcion.Nota == 0)
+                {
+                    <td>Cursando</td>
+                }
+                else if (inscripcion.Nota == -1)
+                {
+                    <td>Ausente</td>
+                }
+            </tr>
         }
     </table>
 

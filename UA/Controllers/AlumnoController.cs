@@ -15,28 +15,36 @@ namespace UA.Controllers
         [HttpGet]
         public ActionResult MateriasRendidas(int id)
         {
-            /*List<Inscripcion> listaId = new List<Inscripcion>();
-            Inscripcion a = new Inscripcion();
-            a.IdAlumno = id;
-            listaId.Add(a);*/
-
             List<Inscripcion> materias = new List<Inscripcion>();
             materias = db.Inscripcion.Where(i => i.IdAlumno == id && i.Nota > 0).ToList();
-            return View(materias);
+            List<ReporteViewModel> reporte = new List<ReporteViewModel>();
+            foreach (Inscripcion materia in materias)
+            {
+                ReporteViewModel reporteModel = new ReporteViewModel(materia);
+
+                reporteModel.Materia = db.Materias.First(i => i.ID == materia.IDMateria).Materia;
+                reporte.Add(reporteModel);
+            }
+            return View(reporte);
         }
 
         [HttpGet]
         public ActionResult MateriasAprobadas(int id)
         {
-            /*List<Inscripcion> listaId = new List<Inscripcion>();
-            Inscripcion a = new Inscripcion();
-            a.IdAlumno = id;
-            listaId.Add(a);*/
-
             List<Inscripcion> materias = new List<Inscripcion>();
             materias = db.Inscripcion.Where(i => i.IdAlumno == id && i.Nota > 3).ToList();
-            return View(materias);
+            List<ReporteViewModel> reporte = new List<ReporteViewModel>();
+            foreach (Inscripcion materia in materias)
+            {
+                ReporteViewModel reporteModel = new ReporteViewModel(materia);
+
+                reporteModel.Materia = db.Materias.First(i => i.ID == materia.IDMateria).Materia;
+                reporte.Add(reporteModel);
+            }
+            return View(reporte);
         }
+
+
 
         [HttpGet]
         public ActionResult CancelarIns(Guid id)
@@ -61,8 +69,6 @@ namespace UA.Controllers
             ValidarYaInscripto(model);
             ValidarMateriaExiste(model);
             Validar7materias(model);
-            //ValidarCorrelativa1(model);
-            //ValidarCorrelativa2(model);
             ValidarCorrelativas(model);
             if (ModelState.IsValid)
             {
@@ -70,7 +76,6 @@ namespace UA.Controllers
                 db.SaveChanges();
                 return RedirectToAction("MateriasAlu", new { id = model.IdAlumno });
             }
-            //ViewBag.Message = ("No cargo lista");
             return View(model);
         }
 
@@ -186,32 +191,6 @@ namespace UA.Controllers
             }
             return correlativaAprovada2;
         }
-        /*public void ValidarCorrelativasx(InscripcionViewModel model)
-        {
-            //ValidarCorrelativa1(model);
-            //ValidarCorrelativa2(model);
-
-            MateriaC materia = db.Materias.First(i => i.ID == model.IDMateria);
-            *//*if (materia.IDcorrelativa2 != null && materia.IDcorrelativa1 != null)
-            {*//*
-                if (ValidarCorrelativa1(model) == false && ValidarCorrelativa2(model) == false)
-                {
-                    MateriaC correlativa2 = db.Materias.First(i => i.ID == materia.IDcorrelativa2);
-                    MateriaC correlativa1 = db.Materias.First(i => i.ID == materia.IDcorrelativa1);
-                    ModelState.AddModelError(nameof(model.IDMateria), $"Falta aprobar {correlativa1.Materia} y {correlativa2.Materia}");
-                }
-                else if (ValidarCorrelativa1(model) == false)
-                {
-                MateriaC correlativa1 = db.Materias.First(i => i.ID == materia.IDcorrelativa1);
-                ModelState.AddModelError(nameof(model.IDMateria), $"Falta aprobar {correlativa1.Materia}");
-                }
-                else if (ValidarCorrelativa2(model) == false)
-                {
-                MateriaC correlativa2 = db.Materias.First(i => i.ID == materia.IDcorrelativa2);
-                ModelState.AddModelError(nameof(model.IDMateria), $"Falta aprobar {correlativa2.Materia}");
-                }
-            //}
-        }*/
 
         public void ValidarCorrelativas(InscripcionViewModel model)
         {
@@ -237,26 +216,6 @@ namespace UA.Controllers
             //}
         }
 
-
-
-        /*private void ValidarCarrera(MateriaViewModel model)
-        {
-            bool carreraExiste = false;
-            List<CarreraC> carreras = db.Carreras.ToList();
-            foreach (CarreraC carrera in carreras)
-            {
-                if (model.IDcarrera == carrera.ID.Trim())
-                {
-                    carreraExiste = true;
-                }
-            }
-            if (carreraExiste != true)
-            {
-                ModelState.AddModelError(nameof(model.IDcarrera), "La carrera no existe");
-            }
-        }*/
-
-
         [HttpGet]
         public ActionResult LogIn()
         {
@@ -276,17 +235,20 @@ namespace UA.Controllers
         [HttpGet]
         public ActionResult MateriasAlu(int id)
         {
-            /*List<InscripcionViewModel> listaId = new List<InscripcionViewModel>();
-            InscripcionViewModel a = new InscripcionViewModel();
-            a.IdAlumno = id;
-            listaId.Add(a);*/
-
             List<Inscripcion> materias = new List<Inscripcion>();
             materias = db.Inscripcion.Where(i => i.IdAlumno == id).ToList();
-            return View(materias);
+            List<ReporteViewModel> reporte = new List<ReporteViewModel>();
+            foreach(Inscripcion materia in materias)
+            {
+                ReporteViewModel reporteModel = new ReporteViewModel(materia);
 
+                reporteModel.Materia = db.Materias.First(i => i.ID == materia.IDMateria).Materia;
+                reporte.Add(reporteModel);
+            }
+
+
+            return View(reporte);
         }
-
 
         /*[HttpPost]
         public ActionResult MateriasAlu(List<Inscripcion> listaId)
