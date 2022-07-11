@@ -11,6 +11,7 @@ namespace UA.Models
     public class MateriaLogInViewModel
     {   
         [Key]
+        [Required(ErrorMessage = "Debe cargar el Id de la materia")]
         public string ID { get; set; }
 
         

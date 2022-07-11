@@ -31,7 +31,8 @@ namespace UA.Models
         public string IDMateria { get; set; }
         public string Materia { get; set; }
         public string Fecha { get; set; }
-        public int Nota { get; set; }
+        public int Nota { get; set; }   
+        public int Semestre { get; set; }
         public Guid Id { get; set; }
         #endregion
 

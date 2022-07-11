@@ -9,8 +9,11 @@ namespace UA.Models
 {
     public class CarreraViewModel
     {
+
+        [Required(ErrorMessage = "Debe cargar un Id válido")]
         public string ID { get; set; }
 
+        [Required(ErrorMessage = "Debe cargar el nombre de la carrera")]
         public string Carrera { get; set; }
 
     }

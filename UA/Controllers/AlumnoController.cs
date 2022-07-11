@@ -13,6 +13,21 @@ namespace UA.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         [HttpGet]
+        public ActionResult BajaCarrera(int id)
+        {
+            //Inscripcion inscripcion = db.Inscripcion.First(i => i.IdAlumno == id);
+            List<Inscripcion> inscripciones = db.Inscripcion.Where(i => i.IdAlumno == id).ToList();
+            foreach(Inscripcion inscripcion in inscripciones)
+            {
+                db.Inscripcion.Remove(inscripcion);
+            }
+            Alumno alumno = db.Alumnos.First(i => i.ID == id);
+            db.Alumnos.Remove(alumno);
+            db.SaveChanges();
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult MateriasRendidas(int id)
         {
             List<Inscripcion> materias = new List<Inscripcion>();
@@ -120,10 +135,12 @@ namespace UA.Controllers
             int materia7 = 0;
             //filtro inscripciones del alumno
             List<Inscripcion> inscripciones = db.Inscripcion.Where(d => d.IdAlumno == model.IdAlumno).ToList();
+            int semestre = db.Materias.First(i => i.ID == model.IDMateria).Semestre;
 
             foreach (Inscripcion inscripcion in inscripciones)
             {
-                if (inscripcion.Nota == 0)
+                int semestreIns = db.Materias.First(i => i.ID == inscripcion.IDMateria).Semestre;
+                if (inscripcion.Nota == 0 && semestre == semestreIns)
                 {
                     materia7++;
                 }
@@ -243,6 +260,8 @@ namespace UA.Controllers
                 ReporteViewModel reporteModel = new ReporteViewModel(materia);
 
                 reporteModel.Materia = db.Materias.First(i => i.ID == materia.IDMateria).Materia;
+                reporteModel.Semestre = db.Materias.First(i => i.ID == materia.IDMateria).Semestre;
+
                 reporte.Add(reporteModel);
             }
 
