@@ -32,12 +32,16 @@ textarea {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
+
 
 .buttons {
     display: flex;
-}
+    padding: 10%;
+}*/
 
+/*
 .btn {
     text-decoration: none;
     padding: 20px 50px;

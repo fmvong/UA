@@ -4,50 +4,52 @@
 <h1>Materias</h1>
 
 <div>
-    <table class="table table-striped">
-        <tr>
-            <th>ID</th>
-            <th>Materia</th>
-            <th>Semestre</th>
-            <th>Fecha</th>
-            <th>Nota</th>
-            <th>Estado</th>
-            <th>Cancelar</th>
-        </tr>
-        @if (Model[0].Materia != "Ejemplo")
-        {
-            foreach (var inscripcion in Model)
-        {
-        <tr>
-        <td>@inscripcion.IDMateria</td>
-        <td>@inscripcion.Materia</td>
-        <td>@inscripcion.Semestre</td>
-        <td>@inscripcion.Fecha</td>
-        <td>@inscripcion.Nota</td>
-        @if (inscripcion.Nota >= 4)
-        {
-            <td>Aprobado</td>
-        }
-        else if (inscripcion.Nota < 4 && inscripcion.Nota > 0)
-        {
-            <td>Desaprobado</td>
-        }
-        else if (inscripcion.Nota == 0)
-        {
-            <td>Cursando</td>
-        }
-        else if (inscripcion.Nota == -1)
-        {
-            <td>Ausente</td>
-        }
+    @if (Model[0].Materia != "Ejemplo")
+    {
+        <table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Materia</th>
+                <th>Semestre</th>
+                <th>Fecha</th>
+                <th>Nota</th>
+                <th>Estado</th>
+                <th>Cancelar</th>
+            </tr>
 
-        <td><a href='@string.Format("https://localhost:44321/Alumno/CancelarIns/{0}", inscripcion.Id)' class="btn btn-lg">Sí</a></td>
-    </tr>
-        }}
-    </table>
-    
+            @foreach (var inscripcion in Model)
+            {
+            <tr>
+                <td>@inscripcion.IDMateria</td>
+                <td>@inscripcion.Materia</td>
+                <td>@inscripcion.Semestre</td>
+                <td>@inscripcion.Fecha</td>
+                <td>@inscripcion.Nota</td>
+                @if (inscripcion.Nota >= 4)
+                {
+                    <td>Aprobado</td>
+                }
+                else if (inscripcion.Nota < 4 && inscripcion.Nota > 0)
+                {
+                    <td>Desaprobado</td>
+                }
+                else if (inscripcion.Nota == 0)
+                {
+                    <td>Cursando</td>
+                }
+                else if (inscripcion.Nota == -1)
+                {
+                    <td>Ausente</td>
+                }
 
-</div>
+                <td><a href='@string.Format("https://localhost:44321/Alumno/CancelarIns/{0}", inscripcion.Id)' class="btn btn-lg">Sí</a></td>
+            </tr>
+            }
+            
+        </table>
+    }
+
+    </div>
 <br />
 <p><a href='@string.Format("https://localhost:44321/Alumno/NuevaInscripcion/{0}", Model[0].IdAlumno)' class="btn btn-lg">Inscribirse</a></p>
 <br />
