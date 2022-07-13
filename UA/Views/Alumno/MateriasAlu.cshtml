@@ -14,15 +14,17 @@
             <th>Estado</th>
             <th>Cancelar</th>
         </tr>
-        @foreach (var inscripcion in Model)
+        @if (Model[0].Materia != "Ejemplo")
         {
-    <tr>
+            foreach (var inscripcion in Model)
+        {
+        <tr>
         <td>@inscripcion.IDMateria</td>
         <td>@inscripcion.Materia</td>
         <td>@inscripcion.Semestre</td>
         <td>@inscripcion.Fecha</td>
         <td>@inscripcion.Nota</td>
-        @if (inscripcion.Nota > 4)
+        @if (inscripcion.Nota >= 4)
         {
             <td>Aprobado</td>
         }
@@ -41,8 +43,9 @@
 
         <td><a href='@string.Format("https://localhost:44321/Alumno/CancelarIns/{0}", inscripcion.Id)' class="btn btn-lg">Sí</a></td>
     </tr>
-        }
+        }}
     </table>
+    
 
 </div>
 <br />

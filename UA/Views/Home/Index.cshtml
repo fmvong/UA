@@ -1,34 +1,44 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniversidadAlchemit</title>
+    <link href="@Url.Content("~/Content/IndexHome.css")" rel="stylesheet" />
+</head>
 
 
-<div class="jumbotron">
-    <p><a href="https://localhost:44321/Alumno/CrearAlu" class="btn btn-primary btn-lg">Alumno</a></p>
-    <p><a href="https://localhost:44321/Profesor/index" class="btn btn-primary btn-lg">Profesor</a></p>
-    <p><a href="https://localhost:44321/Admin/index" class="btn btn-primary btn-lg">Admin</a></p>
-</div>
+@*<div class="jumbotron">*@
+    <div class="container">
+        <div class="buttons">
+            <p><a href="https://localhost:44321/Alumno/CrearAlu" class="btn btn-primary btn-lg">Alumno</a></p>
+            <p><a href="https://localhost:44321/Profesor/index" class="btn btn-primary btn-lg">Profesor</a></p>
+            <p><a href="https://localhost:44321/Admin/index" class="btn btn-primary btn-lg">Admin</a></p>
+        </div>
+    </div>
 
-<!--
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <!--
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Getting started</h2>
+            <p>
+                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                enables a clean separation of concerns and gives you full control over markup
+                for enjoyable, agile development.
+            </p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Get more libraries</h2>
+            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Web Hosting</h2>
+            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
--->
+    -->

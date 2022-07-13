@@ -32,6 +32,20 @@ namespace UA.Controllers
         {
             List<Inscripcion> materias = new List<Inscripcion>();
             materias = db.Inscripcion.Where(i => i.IdAlumno == id && i.Nota > 0).ToList();
+            if (materias.Count == 0)
+            {
+                List<ReporteViewModel> reporteVacio = new List<ReporteViewModel>();
+                ReporteViewModel a = new ReporteViewModel();
+                a.IdAlumno = id;
+                a.IDMateria = "X01";
+                a.Id = new Guid();
+                a.Semestre = 0;
+                a.Fecha = " ";
+                a.Nota = 4;
+                a.Materia = "Ejemplo";
+                reporteVacio.Add(a);
+                return View(reporteVacio);
+            }
             List<ReporteViewModel> reporte = new List<ReporteViewModel>();
             foreach (Inscripcion materia in materias)
             {
@@ -48,6 +62,20 @@ namespace UA.Controllers
         {
             List<Inscripcion> materias = new List<Inscripcion>();
             materias = db.Inscripcion.Where(i => i.IdAlumno == id && i.Nota > 3).ToList();
+            if (materias.Count == 0)
+            {
+                List<ReporteViewModel> reporteVacio = new List<ReporteViewModel>();
+                ReporteViewModel a = new ReporteViewModel();
+                a.IdAlumno = id;
+                a.IDMateria = "X01";
+                a.Id = new Guid();
+                a.Semestre = 0;
+                a.Fecha = " ";
+                a.Nota = 4;
+                a.Materia = "Ejemplo";
+                reporteVacio.Add(a);
+                return View(reporteVacio);
+            }
             List<ReporteViewModel> reporte = new List<ReporteViewModel>();
             foreach (Inscripcion materia in materias)
             {
@@ -73,7 +101,7 @@ namespace UA.Controllers
         [HttpGet]
         public ActionResult NuevaInscripcion(int id)
         {
-            Inscripcion inscripcion = db.Inscripcion.First(i => i.IdAlumno == id);
+            //Inscripcion inscripcion = db.Inscripcion.First(i => i.IdAlumno == id);
             InscripcionViewModel model = new InscripcionViewModel { IdAlumno = id };
             return View(model);
         }
@@ -254,6 +282,20 @@ namespace UA.Controllers
         {
             List<Inscripcion> materias = new List<Inscripcion>();
             materias = db.Inscripcion.Where(i => i.IdAlumno == id).ToList();
+            if(materias.Count == 0)
+            {
+                List<ReporteViewModel> reporteVacio = new List<ReporteViewModel>();
+                ReporteViewModel a = new ReporteViewModel();
+                a.IdAlumno = id;
+                a.IDMateria = "X01";
+                a.Id = new Guid();
+                a.Semestre = 0;
+                a.Fecha = " ";
+                a.Nota = 4;
+                a.Materia = "Ejemplo";
+                reporteVacio.Add(a);
+                return View(reporteVacio);
+            }
             List<ReporteViewModel> reporte = new List<ReporteViewModel>();
             foreach(Inscripcion materia in materias)
             {

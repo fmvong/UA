@@ -12,32 +12,34 @@
             <th>Nota</th>
             <th>Estado</th>
         </tr>
-        @foreach (var inscripcion in Model)
+        @if (Model[0].Materia != "Ejemplo")
         {
-            <tr>
-                <td>@inscripcion.IDMateria</td>
-                <td>@inscripcion.Materia</td>
-                <td>@inscripcion.Fecha</td>
-                <td>@inscripcion.Nota</td>
-                @if (inscripcion.Nota > 4)
-                {
-                    <td>Aprobado</td>
-                }
-                else if (inscripcion.Nota < 4 && inscripcion.Nota > 0)
-                {
-                    <td>Desaprobado</td>
-                }
-                else if (inscripcion.Nota == 0)
-                {
-                    <td>Cursando</td>
-                }
-                else if (inscripcion.Nota == -1)
-                {
-                    <td>Ausente</td>
-                }
-            </tr>
-        }
-    </table>
+            foreach (var inscripcion in Model)
+            {
+                <tr>
+                    <td>@inscripcion.IDMateria</td>
+                    <td>@inscripcion.Materia</td>
+                    <td>@inscripcion.Fecha</td>
+                    <td>@inscripcion.Nota</td>
+                    @if (inscripcion.Nota > 4)
+                    {
+                        <td>Aprobado</td>
+                    }
+                    else if (inscripcion.Nota < 4 && inscripcion.Nota > 0)
+                    {
+                        <td>Desaprobado</td>
+                    }
+                    else if (inscripcion.Nota == 0)
+                    {
+                        <td>Cursando</td>
+                    }
+                    else if (inscripcion.Nota == -1)
+                    {
+                        <td>Ausente</td>
+                    }
+                </tr>
+            }}
+        </table>
 
 </div>
 <br />

@@ -1,6 +1,8 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: #1BB769;
+
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -22,3 +24,51 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/*Style Alchemit*/
+
+/*.container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttons {
+    display: flex;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 20px 50px;
+    box-sizing: border-box;
+    position: relative;
+    text-align: center;
+    margin: 32px;
+    line-height: 76px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-size: 300%;
+    font-weight: 600;
+    background: #FFFAFA;
+    width: 421.37px;
+    height: 450px;
+    line-height: 421.37px;
+    padding: 20px;
+    color: #000000;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: box-shadow, transform;
+    transition-property: box-shadow, transform;
+}
+
+    .btn:hover, .btn:focus, .btn:active {
+        box-shadow: 13px 16px 32px rgba(0, 0, 0, 0.5);
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+    }*/
