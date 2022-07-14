@@ -1,27 +1,37 @@
 ﻿@model UA.Models.CarreraViewModel
 
-<p>Espacio del Administrador</p>
+<div class="box1">
+    <div>
+        <div>
+            <h1>Registrar Carreras</h1>
+        </div>
 
-<h1>Registrar Carreras</h1>
+        <form action="/Admin/index" method="POST">
 
-<form action="/Admin/index" method="POST">
+            <label for="IDcarrera">ID de Carrera</label><br />
+            <input class="form-control" type="text" id="ID" name="ID" value="@Model.ID" />
+            @*<span style="color:red">@Html.ValidationMessageFor(m => m.IDcarrera)</span><br />*@
 
-    <label for="IDcarrera">ID de Carrera</label><br />
-    <input class="form-control" type="text" id="ID" name="ID" value="@Model.ID" />
-    @*<span style="color:red">@Html.ValidationMessageFor(m => m.IDcarrera)</span><br />*@
+            <label for="Nombre">Nombre</label><br />
+            <input class="form-control" type="text" id="Carrera" name="Carrera" value="@Model.Carrera" />
+            @*<span style="color:red">@Html.ValidationMessageFor(m => m.Nombre)</span><br />*@
+            @*@Html.TextBoxFor(m => m.Nombre)<br />*@
+            <div class="flex-container">
+                <div>
+                    <button class="createbtn">Crear</button>
+                </div>
+            </div>
+        </form>
+        <br />
+        <div>
+            <p><a href="https://localhost:44321/Admin/CargaMateria" class="btn-lg">Cargar Materia Nueva</a></p>
+        </div>
+        <br />
+        <div>
+            <p><a href="https://localhost:44321" class="btn-lg">Volver</a></p>
+        </div>
 
-    <label for="Nombre">Nombre</label><br />
-    <input class="form-control" type="text" id="Carrera" name="Carrera" value="@Model.Carrera" />
-    @*<span style="color:red">@Html.ValidationMessageFor(m => m.Nombre)</span><br />*@
-    @*@Html.TextBoxFor(m => m.Nombre)<br />*@
-    <br />
-    <button class="boton-switch">Crear</button>
-</form>
-<br />
-<p><a href="https://localhost:44321/Admin/CargaMateria" class="btn btn-lg">Cargar Materia Nueva</a></p>
-
-<br />
-<p><a href="https://localhost:44321" class="btn btn-lg">Volver</a></p>
-
+    </div>
+</div>
 
 

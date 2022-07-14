@@ -1,36 +1,21 @@
 ﻿@model UA.Models.LogInViewModel
 
-<h1>Log In</h1>
+<div class="box1">
+    <div>
+        <div>
+            <h1>Log In</h1>
+        </div>
+        <form action="/Alumno/LogIn" method="POST">
+            <label for="ID">ID del Alumno</label><br />
+            <input class="form-control" type="number" id="ID" name="ID" value="@Model.Id" />
+            <span style="color:red">@Html.ValidationMessageFor(m => m.Id)</span><br />
+            <br />
+            <div class="flex-container">
+                <div>
+                    <button class="createbtn">Ingresar</button>
+                </div>
+            </div>
+        </form>
 
-<div>
-    <form action="/Alumno/LogIn" method="POST">
-        <label for="ID">ID del Alumno</label><br />
-        <input class="form-control" type="number" id="ID" name="ID" value="@Model.Id" />
-        <span style="color:red">@Html.ValidationMessageFor(m => m.Id)</span><br />
-        <br />
-        <button class="boton-switch">Ingresar</button>
-    </form>
-
-    <br />
-
-    @*<div>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Fecha</th>
-                <th>Nota</th>
-            </tr>
-            @foreach (var materia in Model)
-            {
-                <tr>
-                    <td>@materia.IDMateria</td>
-                    <td>@materia.Fecha</td>
-                    <td>@materia.Nota</td>
-                </tr>
-            }
-        </table>
-
-    </div>*@
-    <br />
-
+    </div>
 </div>

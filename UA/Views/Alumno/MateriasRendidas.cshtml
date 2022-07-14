@@ -1,47 +1,56 @@
 ﻿
 @model List<UA.Models.ReporteViewModel>
 
-<h1>Materias Rendidas</h1>
 
-<div>
-    <table class="table table-striped">
-        <tr>
-            <th>ID</th>
-            <th>Materia</th>
-            <th>Fecha</th>
-            <th>Nota</th>
-            <th>Estado</th>
-        </tr>
-        @if (Model[0].Materia != "Ejemplo")
-        {
-            foreach (var inscripcion in Model)
-            {
+<div class="boxtabla">
+    <div>
+        <div class="submit-btn3">
+            <h1>Materias Rendidas</h1>
+        </div>
+        <br />
+        <div class="caja4">
+            <table class="table table-striped">
                 <tr>
-                    <td>@inscripcion.IDMateria</td>
-                    <td>@inscripcion.Materia</td>
-                    <td>@inscripcion.Fecha</td>
-                    <td>@inscripcion.Nota</td>
-                    @if (inscripcion.Nota >= 4)
-                    {
-                        <td>Aprobado</td>
-                    }
-                    else if (inscripcion.Nota < 4 && inscripcion.Nota > 0)
-                    {
-                        <td>Desaprobado</td>
-                    }
-                    else if (inscripcion.Nota == 0)
-                    {
-                        <td>Cursando</td>
-                    }
-                    else if (inscripcion.Nota == -1)
-                    {
-                        <td>Ausente</td>
-                    }
+                    <th>ID</th>
+                    <th>Materia</th>
+                    <th>Fecha</th>
+                    <th>Nota</th>
+                    <th>Estado</th>
                 </tr>
-            }}
-        </table>
+                @if (Model[0].Materia != "Ejemplo")
+                {
+                    foreach (var inscripcion in Model)
+                    {
+                        <tr>
+                            <td>@inscripcion.IDMateria</td>
+                            <td>@inscripcion.Materia</td>
+                            <td>@inscripcion.Fecha</td>
+                            <td>@inscripcion.Nota</td>
+                            @if (inscripcion.Nota >= 4)
+                            {
+                                <td>Aprobado</td>
+                            }
+                            else if (inscripcion.Nota < 4 && inscripcion.Nota > 0)
+                            {
+                                <td>Desaprobado</td>
+                            }
+                            else if (inscripcion.Nota == 0)
+                            {
+                                <td>Cursando</td>
+                            }
+                            else if (inscripcion.Nota == -1)
+                            {
+                                <td>Ausente</td>
+                            }
+                        </tr>
+                    }
+                }
+            </table>
 
-</div>
-<br />
-@*<p><a href="https://localhost:44321/Alumno/CrearAlu" class="btn btn-lg">Volver</a></p>*@
-<p><a href='@string.Format("https://localhost:44321/Alumno/MateriasAlu/{0}", Model[0].IdAlumno)' , class="btn btn-lg">Volver</a></p>
+
+            <br />
+            @*<p><a href="https://localhost:44321/Alumno/CrearAlu" class="btn btn-lg">Volver</a></p>*@
+            <p><a href='@string.Format("https://localhost:44321/Alumno/MateriasAlu/{0}", Model[0].IdAlumno)' , class="btn-lg">Volver</a></p>
+        </div>
+        </div>
+    </div>

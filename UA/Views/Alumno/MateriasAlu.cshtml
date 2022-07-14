@@ -1,65 +1,93 @@
 ﻿
 @model List<UA.Models.ReporteViewModel>
+<body>
+    <div class="boxtabla">
+        
+            <br />
+            <div class="submit-btn3">
+                <h1>Materias</h1>
+            </div>
+            <br />
+            <div class="caja4">
+                @if (Model[0].Materia != "Ejemplo")
+                {
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID</th>
+                            <th>Materia</th>
+                            <th>Semestre</th>
+                            <th>Fecha</th>
+                            <th>Nota</th>
+                            <th>Estado</th>
+                            <th>Cancelar</th>
+                        </tr>
 
-<h1>Materias</h1>
+                        @foreach (var inscripcion in Model)
+                        {
+                            <tr>
+                                <td>@inscripcion.IDMateria</td>
+                                <td>@inscripcion.Materia</td>
+                                <td>@inscripcion.Semestre</td>
+                                <td>@inscripcion.Fecha</td>
+                                <td>@inscripcion.Nota</td>
+                                @if (inscripcion.Nota >= 4)
+                                {
+                                    <td>Aprobado</td>
+                                }
+                                else if (inscripcion.Nota < 4 && inscripcion.Nota > 0)
+                                {
+                                    <td>Desaprobado</td>
+                                }
+                                else if (inscripcion.Nota == 0)
+                                {
+                                    <td>Cursando</td>
+                                }
+                                else if (inscripcion.Nota == -1)
+                                {
+                                    <td>Ausente</td>
+                                }
+                                @if (inscripcion.Nota == 0)
+                                {
+                                    <td><a href='@string.Format("https://localhost:44321/Alumno/CancelarIns/{0}", inscripcion.Id)' class="createbtn btn-lg">Sí</a></td>
+                                }
+                                else
+                                {
+                                    <td> </td>
+                                }
+                            </tr>
+                        }
 
-<div>
-    @if (Model[0].Materia != "Ejemplo")
-    {
-        <table class="table table-striped">
-            <tr>
-                <th>ID</th>
-                <th>Materia</th>
-                <th>Semestre</th>
-                <th>Fecha</th>
-                <th>Nota</th>
-                <th>Estado</th>
-                <th>Cancelar</th>
-            </tr>
+                    </table>
+                }
 
-            @foreach (var inscripcion in Model)
-            {
-            <tr>
-                <td>@inscripcion.IDMateria</td>
-                <td>@inscripcion.Materia</td>
-                <td>@inscripcion.Semestre</td>
-                <td>@inscripcion.Fecha</td>
-                <td>@inscripcion.Nota</td>
-                @if (inscripcion.Nota >= 4)
-                {
-                    <td>Aprobado</td>
-                }
-                else if (inscripcion.Nota < 4 && inscripcion.Nota > 0)
-                {
-                    <td>Desaprobado</td>
-                }
-                else if (inscripcion.Nota == 0)
-                {
-                    <td>Cursando</td>
-                }
-                else if (inscripcion.Nota == -1)
-                {
-                    <td>Ausente</td>
-                }
-                @if (inscripcion.Nota != 0)
-                {
-                    <td><a href='@string.Format("https://localhost:44321/Alumno/CancelarIns/{0}", inscripcion.Id)' class="btn btn-lg">Sí</a></td>
-                    }
-                    else { <td> </td>}
-            </tr>
-            }
-            
-        </table>
-    }
 
+                <br />
+                <p><a href='@string.Format("https://localhost:44321/Alumno/NuevaInscripcion/{0}", Model[0].IdAlumno)' class="btn-lg">Inscribirse</a></p>
+                <br />
+                <p><a href='@string.Format("https://localhost:44321/Alumno/MateriasAprobadas/{0}", Model[0].IdAlumno)' , class="btn-lg">Materias Aprobadas</a></p>
+                <br />
+                <p><a href='@string.Format("https://localhost:44321/Alumno/MateriasRendidas/{0}", Model[0].IdAlumno)' , class="btn-lg">Materias Rendidas</a></p>
+                <br />
+                <p><a href="https://localhost:44321/Alumno/CrearAlu" class="btn-lg">Volver</a></p>
+                <br />
+                <p><a href='@string.Format("https://localhost:44321/Alumno/BajaCarrera/{0}", Model[0].IdAlumno)' class="btn-lg">Dar de baja de la Carrera</a></p>
+            </div>
+        
     </div>
-<br />
-<p><a href='@string.Format("https://localhost:44321/Alumno/NuevaInscripcion/{0}", Model[0].IdAlumno)' class="btn btn-lg">Inscribirse</a></p>
-<br />
-<p><a href='@string.Format("https://localhost:44321/Alumno/MateriasAprobadas/{0}", Model[0].IdAlumno)' , class="btn btn-lg">Materias Aprobadas</a></p>
-<br />
-<p><a href='@string.Format("https://localhost:44321/Alumno/MateriasRendidas/{0}", Model[0].IdAlumno)' , class="btn btn-lg">Materias Rendidas</a></p>
-<br />
-<p><a href="https://localhost:44321/Alumno/CrearAlu" class="btn btn-lg">Volver</a></p>
-<br />
-<p><a href='@string.Format("https://localhost:44321/Alumno/BajaCarrera/{0}", Model[0].IdAlumno)' class="btn btn-lg">Dar de baja de la Carrera</a></p>
+</body>
+
+        <link href="~/Content/sweetalert.css" rel="stylesheet" asp-append-version="true">
+        <link href="~/Content/sweetalert.min.js" rel="stylesheet" asp-append-version="true">
+
+        @*<script>
+                const myTimeout = setTimeout(myGreeting, 5000);
+
+                function myGreeting() {
+                    Swal.fire(
+                        'The Internet?',
+                        'That thing is still around?',
+                        'question'
+                    )
+                }
+            </script>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>*@

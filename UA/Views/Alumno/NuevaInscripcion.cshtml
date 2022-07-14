@@ -1,24 +1,32 @@
 ﻿
 @model UA.Models.InscripcionViewModel
 
-<h1>Nueva Inscripcion</h1>
-@*<p>@ViewBag.Message</p>*@
-<div>
-    <form action="/Alumno/NuevaInscripcion" method="POST">
-        @*<label for="IdAlumno">ID alumno</label><br />*@
-        <input class="form-control" id="IdAlumno" name="IdAlumno" value="@Model.IdAlumno" type="hidden"/>
-        @*<span style="color:red">@Html.ValidationMessageFor(m => m.IdAlumno)</span><br />*@
+<div class="box1">
+    <div>
+        <div>
+            <h1>Nueva Inscripcion</h1>
+        </div>
+        @*<p>@ViewBag.Message</p>*@
+        <div>
+            <form action="/Alumno/NuevaInscripcion" method="POST">
+                @*<label for="IdAlumno">ID alumno</label><br />*@
+                <input class="form-control" id="IdAlumno" name="IdAlumno" value="@Model.IdAlumno" type="hidden" />
+                @*<span style="color:red">@Html.ValidationMessageFor(m => m.IdAlumno)</span><br />*@
 
-        <label for="IDMateria">Id de Materia</label><br />
-        <input class="form-control" type="text" id="IDMateria" name="IDMateria" value="@Model.IDMateria" />
-        <span style="color:red">@Html.ValidationMessageFor(m => m.IDMateria)</span><br />
+                <label for="IDMateria">Id de Materia</label><br />
+                <input class="form-control" type="text" id="IDMateria" name="IDMateria" value="@Model.IDMateria" />
+                <span style="color:red">@Html.ValidationMessageFor(m => m.IDMateria)</span><br />
+                <div class="flex-container">
+                    <button class="createbtn">Registrar</button>
+                </div>
+            </form>
+        </div>
 
-        <button class="boton-switch">Registrar</button>
-    </form>
-</div>
+        <br />
+        @*<p><a href='@string.Format("https://localhost:44321/Alumno/MateriasAlu/{0}", @Model.Id)' class="btn btn-lg">Volver</a></p>*@
 
-<br />
-@*<p><a href='@string.Format("https://localhost:44321/Alumno/MateriasAlu/{0}", @Model.Id)' class="btn btn-lg">Volver</a></p>*@
+        </div>
+    </div>
 
 
 

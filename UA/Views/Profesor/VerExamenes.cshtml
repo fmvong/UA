@@ -1,48 +1,49 @@
 ﻿
 @model List<UA.Models.ReporteViewModel>
 
-<h1>Materias</h1>
-<p>@ViewBag.Message</p>
+<div class="boxtabla box1">
+    <div>
+        <div>
+            <h1>Materias</h1>
+        </div>
+        
+        <p>@ViewBag.Message</p>
 
-<div>
-    <!--<form action="/Profesor/VerExamenes" method="POST">
-        <label for="Nombre">Nombre</label><br />
-        <input class="form-control" type="text" id="Nombre" name="Nombre" value="" />-->
-    @*<span style="color:red">@Html.ValidationMessageFor(m => m.Nombre)</span><br />*@
+        <div>
+            <br />
+            <table class="table table-striped">
+                <tr>
+                    <th>ID del Alumno</th>
+                    <th>Alumno</th>
+                    <th>ID de la Materia</th>
+                    <th>Materia</th>
+                    <th>Fecha</th>
+                    <th>Nota</th>
+                </tr>
+                @foreach (var inscripcion in Model)
+                {
+                    <tr>
+                        <td>@inscripcion.IdAlumno</td>
+                        <td>@inscripcion.Nombre @inscripcion.Apellido</td>
+                        <td>@inscripcion.IDMateria</td>
+                        <td>@inscripcion.Materia</td>
+                        <td>@inscripcion.Fecha</td>
+                        @if (inscripcion.Nota == 0)
+                        {
+                            <td><a href='@string.Format("https://localhost:44321/Profesor/AsignarNota/{0}", inscripcion.Id)' class="createbtn btn-lg">Asignar</a></td>
+                        }
+                        else
+                        {
+                            <td>@inscripcion.Nota</td>
+                        }
+                    </tr>
+                }
+            </table>
 
-    <!--<button class="boton-switch">Mostrar</button>
-    </form>-->
-    <br />
-    <table class="table table-striped">
-        <tr>
-            <th>ID del Alumno</th>
-            <th>Alumno</th>
-            <th>ID de la Materia</th>
-            <th>Materia</th>
-            <th>Fecha</th>
-            <th>Nota</th>
-        </tr>
-        @foreach (var inscripcion in Model)
-        {
-    <tr>
-        <td>@inscripcion.IdAlumno</td>
-        <td>@inscripcion.Nombre @inscripcion.Apellido</td>
-        <td>@inscripcion.IDMateria</td>
-        <td>@inscripcion.Materia</td>
-        <td>@inscripcion.Fecha</td>
-        @if (inscripcion.Nota == 0)
-        {
-            <td><a href='@string.Format("https://localhost:44321/Profesor/AsignarNota/{0}", inscripcion.Id)' class="btn btn-lg">Asignar</a></td>
-        }
-        else
-        {
-            <td>@inscripcion.Nota</td>
-        }
-    </tr>
-        }
-    </table>
+        </div>
+        <br />
+        <p><a href="https://localhost:44321/Profesor/Index" class="btn-lg">Volver</a></p>
 
-</div>
-<br />
-<p><a href="https://localhost:44321/Profesor/Index" class="btn btn-lg">Volver</a></p>
+        </div>
+    </div>
 

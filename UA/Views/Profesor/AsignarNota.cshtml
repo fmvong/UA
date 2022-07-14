@@ -1,46 +1,52 @@
 ﻿@model UA.Models.NotaViewModel
 
-<h1>Asignar nota final</h1>
+<div class="box1">
+    <div>
+        <div>
+            <h1>Asignar nota final</h1>
+        </div>
+        <div>
+            <form action="/Profesor/AsignarNota" method="POST">
+                <label for="Fecha">Fecha</label><br />
+                <input class="form-control" type="text" id="Fecha" name="Fecha" value="@Model.Fecha" />
+                @*<span style="color:red">@Html.ValidationMessageFor(m => m.Id)</span><br />*@
+                <br />
+                <label for="Nota">Nota</label><br />
+                <input class="form-control" type="number" id="Nota" name="Nota" value="@Model.Nota" />
+                @*<span style="color:red">@Html.ValidationMessageFor(m => m.Id)</span><br />*@
+                <br />
+                @*@Html.HiddenFor(q => q.Id)*@
+                @*<label for="Id" type="hidden">ID</label><br />*@
+                <input class="form-control" type="hidden" id="Id" name="ID" value="@Model.Id" hidden />
+                @*<span style="color:red">@Html.ValidationMessageFor(m => m.Id)</span><br />*@
+                <br />
+                <div class="flex-container">
+                    <button class="createbtn">Ingresar</button>
+                </div>
+            </form>
 
-<div>
-    <form action="/Profesor/AsignarNota" method="POST">
-        <label for="Fecha">Fecha</label><br />
-        <input class="form-control" type="text" id="Fecha" name="Fecha" value="@Model.Fecha" />
-        @*<span style="color:red">@Html.ValidationMessageFor(m => m.Id)</span><br />*@
-        <br />
-        <label for="Nota">Nota</label><br />
-        <input class="form-control" type="number" id="Nota" name="Nota" value="@Model.Nota" />
-        @*<span style="color:red">@Html.ValidationMessageFor(m => m.Id)</span><br />*@
-        <br />
-        @*@Html.HiddenFor(q => q.Id)*@
-        @*<label for="Id" type="hidden">ID</label><br />*@
-        <input class="form-control" type="hidden" id="Id" name="ID" value="@Model.Id" hidden/>
-        @*<span style="color:red">@Html.ValidationMessageFor(m => m.Id)</span><br />*@
-        <br />
+            <br />
 
-        <button class="boton-switch">Ingresar</button>
-    </form>
+            @*<div>
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>Fecha</th>
+                            <th>Nota</th>
+                        </tr>
+                        @foreach (var materia in Model)
+                        {
+                            <tr>
+                                <td>@materia.IDMateria</td>
+                                <td>@materia.Fecha</td>
+                                <td>@materia.Nota</td>
+                            </tr>
+                        }
+                    </table>
 
-    <br />
+                </div>*@
+            <br />
 
-    @*<div>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Fecha</th>
-                <th>Nota</th>
-            </tr>
-            @foreach (var materia in Model)
-            {
-                <tr>
-                    <td>@materia.IDMateria</td>
-                    <td>@materia.Fecha</td>
-                    <td>@materia.Nota</td>
-                </tr>
-            }
-        </table>
-
-    </div>*@
-    <br />
-
+        </div>
+    </div>
 </div>

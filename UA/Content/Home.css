@@ -1,0 +1,225 @@
+﻿html, body {
+    background-color: #1BB769;
+    height: 100%;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.buttons {
+    display: flex;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 20px 50px;
+    box-sizing: border-box;
+    position: relative;
+    text-align: center;
+    margin: 32px;
+    line-height: 76px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-size: 200%;
+    font-weight: 600;
+    background: #FFFAFA;
+    width: 236.37px;
+    height: 250px;
+    line-height: 221.37px;
+    padding: 20px;
+    color: #000000;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: box-shadow, transform;
+    transition-property: box-shadow, transform;
+}
+
+    .btn:hover, .btn:focus, .btn:active {
+        box-shadow: 13px 16px 32px rgba(0, 0, 0, 0.5);
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+
+/* Admin */
+.box1 {
+    width: auto;
+    height: auto;
+    padding: 5px 30px;
+    background: #FFFFFF;
+    box-shadow: 13px 16px 32px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    /*justify-content: center;*/
+    position: absolute;
+    display: flex;
+    background-color: white;
+    align-items: center;
+}
+
+.boxtabla {
+    width: 80%;
+    height: auto;*/
+    padding: 5px 30px;
+    /*background: #FFFFFF;*/
+    /*box-shadow: 13px 16px 32px rgba(0, 0, 0, 0.5);*/
+    border-radius: 20px;
+    /*justify-content: center;*/
+    /*position: absolute;*/
+    /*display: flex;
+*/  /*background-color: white;*/
+    /*align-items: center;*/
+    margin: auto 20%;
+}
+
+.boxmateriasalu {
+    margin-top: 20%;
+    width: auto;
+    height: auto;
+    padding: 5px 30px;
+    background: #FFFFFF;
+    box-shadow: 13px 16px 32px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    /*justify-content: center;*/
+    position: absolute;
+    display: flex;
+    background-color: white;
+    align-items: center;
+}
+
+.boxtabla tr {
+    
+    height: auto;
+    padding: 30px;
+    margin: 20px;
+   
+}
+
+.flex-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+    .flex-container div {
+        width: 30px;
+        height: 30px;
+        margin-top: 20px;
+        margin-right: 15%;
+        margin-bottom: 5%;
+    }
+
+/*Button Create*/
+.createbtn {
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    background: #1BB769;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0,0,0, 0.1);
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: box-shadow, transform;
+    transition-property: box-shadow, transform;
+}
+
+    .createbtn:hover, .createbtn:focus, .createbtn:active {
+        box-shadow: 0 0 20px rgba(0,0,0, 0.5);
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+
+
+/*Alumno*/
+.box2 {
+    width: 25%;
+    height: auto;
+    padding: 5px 3%;
+    background: #FFFFFF;
+    box-shadow: 13px 16px 32px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    justify-content: center;
+    position: absolute;
+    display: flex;
+    background-color: white;
+    align-items: center;
+}
+
+.containers {
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flx-cont {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+    .flx-cont div {
+        width: 30px;
+        height: 30px;
+        margin-top: 20px;
+        margin-right: 15%;
+        margin-bottom: 5%;
+    }
+
+
+    /*Alumno*/
+
+
+.caja4 {
+    border-radius: 15px;
+    width: 900px;
+    position: relative;
+    margin: auto auto;
+    background: #fff;
+    padding: 5px;
+    overflow: hidden;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
+}
+
+.submit-btn3 {
+    justify-content: center;
+    width: 100%;
+    padding: 1px 34%;
+    margin: auto;
+    color: #FFFFFF;
+    font-weight: bold;
+    background: #000000;
+    outline: none;
+    border-radius: 15px;
+    text-align: center;
+    font-size: medium;
+}
+
+.submit-btn2 {
+    width: 17%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    font-weight: bold;
+    background: linear-gradient(to right, #A2FEC8, #E1FFED);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+}

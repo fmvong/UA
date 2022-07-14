@@ -1,38 +1,34 @@
 ﻿
 @model UA.Models.AlumnoViewModel
 
-<p>Espacio del Alumno</p>
+<div class="box2">
+    <div class="containers">
+        <div>
+            <h1>Registrar</h1>
+        </div>
 
-<h1>Registrar</h1>
+        <form class="containers" action="/Alumno/CrearAlu" method="POST">
+            <div class="containers">
+                <label for="Nombre">Nombre</label><br />
+                <input class="form-control" type="text" id="Nombre" name="Nombre" value="@Model.Nombre" />
+                <span style="color:red">@Html.ValidationMessageFor(m => m.Nombre)</span><br />
+                @*@Html.TextBoxFor(m => m.Nombre)<br />*@
 
-<form action="/Alumno/CrearAlu" method="POST">
-    <label for="Nombre">Nombre</label><br />
-    <input class="form-control" type="text" id="Nombre" name="Nombre" value="@Model.Nombre" />
-    <span style="color:red">@Html.ValidationMessageFor(m => m.Nombre)</span><br />
-    @*@Html.TextBoxFor(m => m.Nombre)<br />*@
+                <label for="Apellido">Apellido</label><br />
+                <input class="form-control" type="text" id="Apellido" name="Apellido" value="@Model.Apellido" />
+                <span style="color:red">@Html.ValidationMessageFor(m => m.Apellido)</span><br />
 
-    <label for="Apellido">Apellido</label><br />
-    <input class="form-control" type="text" id="Apellido" name="Apellido" value="@Model.Apellido" />
-    <span style="color:red">@Html.ValidationMessageFor(m => m.Apellido)</span><br />
-
-    <label for="IDcarrera">ID de Carrera</label><br />
-    <input class="form-control" type="text" id="IDcarrera" name="IDcarrera" value="@Model.IDcarrera" />
-    <span style="color:red">@Html.ValidationMessageFor(m => m.IDcarrera)</span><br />
-
-    <button class="boton-switch">Registrar</button>
-</form>
-<br />
-
-
-@*<form action="/Alumno/MateriasAlu" method="POST">
-    <label for="ID">ID del Alumno</label><br />
-    <input class="form-control" type="text" id="ID" name="IDalumno" value="" />
-    <span style="color:red">@Html.ValidationMessageFor(m => m.IDcarrera)</span><br />
-
-    <button class="boton-switch">Ingresar</button>
-</form>*@
-
-
-<p><a href="https://localhost:44321/Alumno/LogIn" class="boton">Ya estoy Registrado</a></p>
-
-<!-- <p><a href="https://localhost:44321/Alumno/ShowAlu" class="btn btn-primary btn-lg">Alumnos Inscriptos</a></p> -->
+                <label for="IDcarrera">ID de Carrera</label><br />
+                <input class="form-control" type="text" id="IDcarrera" name="IDcarrera" value="@Model.IDcarrera" />
+                <span style="color:red">@Html.ValidationMessageFor(m => m.IDcarrera)</span><br />
+            </div>
+            <div class="flx-cont">
+                <div>
+                    <button class="createbtn">Registrar</button>
+                </div>
+            </div>
+        </form>
+        <br />
+        <p><a href="https://localhost:44321/Alumno/LogIn" class="boton">Ya estoy Registrado</a></p>
+    </div>
+</div>
