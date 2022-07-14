@@ -41,8 +41,11 @@
                 {
                     <td>Ausente</td>
                 }
-
-                <td><a href='@string.Format("https://localhost:44321/Alumno/CancelarIns/{0}", inscripcion.Id)' class="btn btn-lg">Sí</a></td>
+                @if (inscripcion.Nota != 0)
+                {
+                    <td><a href='@string.Format("https://localhost:44321/Alumno/CancelarIns/{0}", inscripcion.Id)' class="btn btn-lg">Sí</a></td>
+                    }
+                    else { <td> </td>}
             </tr>
             }
             

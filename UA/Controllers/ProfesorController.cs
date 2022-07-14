@@ -61,8 +61,11 @@ namespace UA.Controllers
                 ReporteViewModel reporteModel = new ReporteViewModel(materia);
 
                 reporteModel.Materia = db.Materias.First(i => i.ID == materia.IDMateria).Materia;
-                reporteModel.Nombre = db.Alumnos.First(i => i.ID == materia.IdAlumno).Nombre;
-                reporteModel.Apellido = db.Alumnos.First(i => i.ID == materia.IdAlumno).Apellido;
+                Alumno alumno = db.Alumnos.FirstOrDefault(i => i.ID == materia.IdAlumno);
+                if (alumno == null)
+                    continue;
+                reporteModel.Nombre = alumno.Nombre;
+                reporteModel.Apellido = alumno.Apellido;
 
                 reporte.Add(reporteModel);
             }
