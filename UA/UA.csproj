@@ -186,6 +186,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AcademicViewModel.cs" />
     <Compile Include="Models\CarreraViewModel.cs" />
+    <Compile Include="Models\MateriaIdCarrerasViewModel.cs" />
     <Compile Include="Models\ReporteViewModel.cs" />
     <Compile Include="Models\NotaViewModel.cs" />
     <Compile Include="Models\MateriaLogInViewModel.cs" />

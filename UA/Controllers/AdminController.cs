@@ -17,13 +17,23 @@ namespace UA.Controllers
         }
         public ActionResult CargaMateria()
         {
-            return View(new MateriaViewModel());
+            MateriaIdCarrerasViewModel model = new MateriaIdCarrerasViewModel { ID = " ", Materia = " ", IDcarrera = " ", Semestre = 1, CarrerasID = new List<string>() };
+            List<CarreraC> carreras = db.Carreras.ToList();
+            foreach(CarreraC carrera in carreras)
+            {
+                model.CarrerasID.Add(carrera.ID);
+            }
+
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult CargaMateria(MateriaViewModel model)
+        public ActionResult CargaMateria(MateriaIdCarrerasViewModel model)
         {
-            ValidarCarrera(model);
+            ValidarCaracteres50materia(model);
+            ValidarSemestre(model);
+            ValidarCaracteres10materia(model);
+            ValidarCarreraExiste(model);
             ValidarMateria(model);
             if (ModelState.IsValid)
             {
@@ -32,10 +42,44 @@ namespace UA.Controllers
 
                 return RedirectToAction("ExitoRegMateria", new { nombre = model.Materia });
             }
+
+            if (model.CarrerasID == null)
+            {
+                List<CarreraC> carreras = db.Carreras.ToList();
+                foreach (CarreraC carrera in carreras)
+                {
+                    model.CarrerasID.Add(carrera.ID);
+                }
+            }
+
             return View(model);
         }
 
-        private void ValidarCarrera(MateriaViewModel model)
+        private void ValidarSemestre(MateriaIdCarrerasViewModel model)
+        {
+            if (model.Semestre != 1 && model.Semestre != 2)
+            {
+                ModelState.AddModelError(nameof(model.Semestre), "El semestre debe ser 1 o 2");
+            }
+        }
+
+        private void ValidarCaracteres50materia(MateriaIdCarrerasViewModel model)
+        {
+            if (model.Materia != null && model.Materia.Length > 50)
+            {
+                ModelState.AddModelError(nameof(model.Materia), "La materia puede tener hasta 50 caracteres.");
+            }
+        }
+
+        private void ValidarCaracteres10materia(MateriaIdCarrerasViewModel model)
+        {
+            if (model.ID != null && model.ID.Length > 10)
+            {
+                ModelState.AddModelError(nameof(model.ID), "El id tiene hasta 10 caracteres.");
+            }
+        }
+
+        private void ValidarCarreraExiste(MateriaIdCarrerasViewModel model)
         {
             bool carreraExiste = false;
             List<CarreraC> carreras = db.Carreras.ToList();
@@ -52,7 +96,7 @@ namespace UA.Controllers
             }
         }
 
-        private void ValidarMateria(MateriaViewModel model)
+        private void ValidarMateria(MateriaIdCarrerasViewModel model)
         {
             bool materiaNoExiste = false;
             List<MateriaC> materias = db.Materias.ToList();
@@ -69,6 +113,39 @@ namespace UA.Controllers
             }
         }
 
+        private void ValidarCarreraNoExiste(CarreraViewModel model)
+        {
+            bool carreraExiste = false;
+            List<CarreraC> carreras = db.Carreras.ToList();
+            foreach (CarreraC carrera in carreras)
+            {
+                if (model.ID == carrera.ID.Trim())
+                {
+                    carreraExiste = true;
+                }
+            }
+            if (carreraExiste == true)
+            {
+                ModelState.AddModelError(nameof(model.ID), "La carrera ya existe");
+            }
+        }
+
+        private void ValidarCaracteres10(CarreraViewModel model)
+        {
+            if (model.ID!= null && model.ID.Length > 10)
+            {
+                ModelState.AddModelError(nameof(model.ID), "El id tiene hasta 10 caracteres.");
+            }
+        }
+
+        private void ValidarCaracteres50(CarreraViewModel model)
+        {
+            if (model.Carrera != null && model.Carrera.Length > 10)
+            {
+                ModelState.AddModelError(nameof(model.Carrera), "La Carrera tiene hasta 50 caracteres.");
+            }
+        }
+
         public ActionResult index()
         {
             ViewBag.Message = "Bienvenido Admin";
@@ -79,6 +156,9 @@ namespace UA.Controllers
         [HttpPost]
         public ActionResult index(CarreraViewModel model)
         {
+            ValidarCaracteres50(model);
+            ValidarCaracteres10(model);
+            ValidarCarreraNoExiste(model);
             if (ModelState.IsValid)
             {
                 var db = new ApplicationDbContext();

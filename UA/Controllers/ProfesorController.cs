@@ -55,17 +55,35 @@ namespace UA.Controllers
         {
             List<Inscripcion> materias = new List<Inscripcion>();
             materias = db.Inscripcion.Where(i => i.IDMateria == id).ToList();
+            if (materias.Count == 0)
+            {
+                List<ReporteViewModel> reporteVacio = new List<ReporteViewModel>();
+                ReporteViewModel a = new ReporteViewModel();
+                a.IdAlumno = 1;
+                a.IDMateria = id;
+                a.Id = new Guid();
+                a.Semestre = 0;
+                a.Fecha = " ";
+                a.Nota = 4;
+                a.Materia = "Ejemplo";
+                reporteVacio.Add(a);
+                return View(reporteVacio);
+            }
             List<ReporteViewModel> reporte = new List<ReporteViewModel>();
             foreach (Inscripcion materia in materias)
             {
                 ReporteViewModel reporteModel = new ReporteViewModel(materia);
 
                 reporteModel.Materia = db.Materias.First(i => i.ID == materia.IDMateria).Materia;
+
                 Alumno alumno = db.Alumnos.FirstOrDefault(i => i.ID == materia.IdAlumno);
                 if (alumno == null)
                     continue;
                 reporteModel.Nombre = alumno.Nombre;
                 reporteModel.Apellido = alumno.Apellido;
+
+                //reporteModel.Nombre = db.Alumnos.FirstOrDefault(i => i.ID == materia.IdAlumno).Nombre;
+                //reporteModel.Apellido = db.Alumnos.FirstOrDefault(i => i.ID == materia.IdAlumno).Apellido;
 
                 reporte.Add(reporteModel);
             }

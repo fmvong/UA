@@ -1,49 +1,54 @@
 ﻿
 @model List<UA.Models.ReporteViewModel>
 
-<div class="boxtabla box1">
+<div class="boxtabla">
     <div>
-        <div>
-            <h1>Materias</h1>
-        </div>
-        
-        <p>@ViewBag.Message</p>
+            <div class="submit-btn3">
+                <h1>Materias</h1>
+            </div>
 
-        <div>
-            <br />
-            <table class="table table-striped">
-                <tr>
-                    <th>ID del Alumno</th>
-                    <th>Alumno</th>
-                    <th>ID de la Materia</th>
-                    <th>Materia</th>
-                    <th>Fecha</th>
-                    <th>Nota</th>
-                </tr>
-                @foreach (var inscripcion in Model)
+            <p>@ViewBag.Message</p>
+
+            <div class="caja4">
+                @if (Model[0].Materia != "Ejemplo")
                 {
-                    <tr>
-                        <td>@inscripcion.IdAlumno</td>
-                        <td>@inscripcion.Nombre @inscripcion.Apellido</td>
-                        <td>@inscripcion.IDMateria</td>
-                        <td>@inscripcion.Materia</td>
-                        <td>@inscripcion.Fecha</td>
-                        @if (inscripcion.Nota == 0)
+                    <br />
+                    <table class="table table-striped">
+                        <tr>
+                            <th>ID del Alumno</th>
+                            <th>Alumno</th>
+                            <th>ID de la Materia</th>
+                            <th>Materia</th>
+                            <th>Fecha</th>
+                            <th>Nota</th>
+                        </tr>
+
+
+                        @foreach (var inscripcion in Model)
                         {
-                            <td><a href='@string.Format("https://localhost:44321/Profesor/AsignarNota/{0}", inscripcion.Id)' class="createbtn btn-lg">Asignar</a></td>
+                        <tr>
+                            <td>@inscripcion.IdAlumno</td>
+                            <td>@inscripcion.Nombre @inscripcion.Apellido</td>
+                            <td>@inscripcion.IDMateria</td>
+                            <td>@inscripcion.Materia</td>
+                            <td>@inscripcion.Fecha</td>
+                            @if (inscripcion.Nota == 0)
+                            {
+                                <td><a href='@string.Format("https://localhost:44321/Profesor/AsignarNota/{0}", inscripcion.Id)' class="createbtn btn-lg">Asignar</a></td>
+                            }
+                            else
+                            {
+                                <td>@inscripcion.Nota</td>
+                            }
+                        </tr>
                         }
-                        else
-                        {
-                            <td>@inscripcion.Nota</td>
-                        }
-                    </tr>
+
+                    </table>
                 }
-            </table>
 
-        </div>
-        <br />
-        <p><a href="https://localhost:44321/Profesor/Index" class="btn-lg">Volver</a></p>
-
+                    <br />
+                    <p><a href="https://localhost:44321/Profesor/Index" class="btn-lg">Volver</a></p>
+                </div>
         </div>
     </div>
 

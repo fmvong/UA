@@ -1,4 +1,4 @@
-﻿@model UA.Models.MateriaViewModel
+﻿@model UA.Models.MateriaIdCarrerasViewModel
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,23 +20,41 @@
 
             <label for="Nombre">Materia</label><br />
             <input class="form-control" type="text" id="Materia" name="Materia" value="@Model.Materia" />
-            @*<span style="color:red">@Html.ValidationMessageFor(m => m.Nombre)</span><br />*@
+            <span style="color:red">@Html.ValidationMessageFor(m => m.Materia)</span><br />
 
-            <label for="IDcarrera">ID de la Carrera</label><br />
-            <input class="form-control" type="text" id="IDcarrera" name="IDCarrera" value="@Model.IDcarrera" />
+            @*<label for="IDcarrera">ID de la Carrera</label><br />
+        <input class="form-control" type="text" id="IDcarrera" name="IDCarrera" value="@Model.IDcarrera" />*@
             <span style="color:red">@Html.ValidationMessageFor(m => m.IDcarrera)</span><br />
+            <label for="IDcarrera">ID de la Carrera</label><br />
+            <div class="select">
+                <select name="text" id="IDcarrera">
+                    <option selected disabled>Elija un ID</option>
+                    @foreach (string id in Model.CarrerasID)
+                    {
+                        <option value="text">@id</option>
+
+                    }
+                </select>
+            </div>
+
+            @*<input hidden class="form-control" type="hidden" id="CarrerasID" name="CarrerasID" value="@Model.CarrerasID" />*@
 
             <label for="IDcorrelativa1">ID de la Correlativa 1</label><br />
             <input class="form-control" type="text" id="IDcorrelativa1" name="IDcorrelativa1" value="@Model.IDcorrelativa1" />
-            @*<span style="color:red">@Html.ValidationMessageFor(m => m.Nombre)</span><br />*@
 
             <label for="IDcorrelativa2">ID de la Correlativa 2</label><br />
             <input class="form-control" type="text" id="IDcorrelativa2" name="IDcorrelativa2" value="@Model.IDcorrelativa2" />
-            @*<span style="color:red">@Html.ValidationMessageFor(m => m.Nombre)</span><br />*@
 
             <label for="Semestre">Semestre</label><br />
-            <input class="form-control" type="text" id="Semestre" name="Semestre" value="@Model.Semestre" />
-            @*<span style="color:red">@Html.ValidationMessageFor(m => m.Nombre)</span><br />*@
+            @*<input class="form-control" type="text" id="Semestre" name="Semestre" value="@Model.Semestre" />*@
+            <span style="color:red">@Html.ValidationMessageFor(m => m.Semestre)</span><br />
+            <div class="select">
+                <select name="format" id="format">
+                    <option selected disabled>Elija un Semestre</option>
+                    <option value="number">1</option>
+                    <option value="number">2</option>
+                </select>
+            </div>
 
             <div class="flex-container">
                 <div>
@@ -44,11 +62,11 @@
                 </div>
             </div>
         </form>
-        <br />
-        <div>
-            <p><a href="https://localhost:44321/Admin/index" class="btn-lg">Volver</a></p>
+            <br />
+            <div>
+                <p><a href="https://localhost:44321/Admin/index" class="btn-lg">Volver</a></p>
+            </div>
         </div>
     </div>
-</div>
 
 
