@@ -21,7 +21,7 @@ namespace UA.Controllers
             List<CarreraC> carreras = db.Carreras.ToList();
             foreach(CarreraC carrera in carreras)
             {
-                model.CarrerasID.Add(carrera.ID);
+                model.CarrerasID.Add(carrera.ID.Trim());
             }
 
             return View(model);
@@ -35,21 +35,24 @@ namespace UA.Controllers
             ValidarCaracteres10materia(model);
             ValidarCarreraExiste(model);
             ValidarMateria(model);
+
+            if (model.CarrerasID == null)
+            {
+                List<CarreraC> carreras = db.Carreras.ToList();
+                List<string> a = new List<string>();
+                model.CarrerasID = a;
+                foreach (CarreraC carrera in carreras)
+                {
+                    model.CarrerasID.Add(carrera.ID.Trim());
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 db.Materias.Add(new MateriaC { ID = model.ID, Materia = model.Materia, IDcarrera = model.IDcarrera, IDcorrelativa1 = model.IDcorrelativa1, IDcorrelativa2 = model.IDcorrelativa2, Semestre = model.Semestre });
                 db.SaveChanges();
 
                 return RedirectToAction("ExitoRegMateria", new { nombre = model.Materia });
-            }
-
-            if (model.CarrerasID == null)
-            {
-                List<CarreraC> carreras = db.Carreras.ToList();
-                foreach (CarreraC carrera in carreras)
-                {
-                    model.CarrerasID.Add(carrera.ID);
-                }
             }
 
             return View(model);

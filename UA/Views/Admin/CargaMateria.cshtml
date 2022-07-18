@@ -27,12 +27,18 @@
             <span style="color:red">@Html.ValidationMessageFor(m => m.IDcarrera)</span><br />
             <label for="IDcarrera">ID de la Carrera</label><br />
             <div class="select">
-                <select name="text" id="IDcarrera">
-                    <option selected disabled>Elija un ID</option>
+                <select name="IDcarrera" id="IDcarrera">
+                    @if (Model.IDcarrera == " ")
+                    {
+                        <option selected disabled>Elija un ID</option>
+                    }
+                    else
+                    {
+                        <option selected>@Model.IDcarrera</option>
+                    }
                     @foreach (string id in Model.CarrerasID)
                     {
-                        <option value="text">@id</option>
-
+                        <option value="@id">@id</option>
                     }
                 </select>
             </div>
@@ -44,16 +50,21 @@
 
             <label for="IDcorrelativa2">ID de la Correlativa 2</label><br />
             <input class="form-control" type="text" id="IDcorrelativa2" name="IDcorrelativa2" value="@Model.IDcorrelativa2" />
-
-            <label for="Semestre">Semestre</label><br />
-            @*<input class="form-control" type="text" id="Semestre" name="Semestre" value="@Model.Semestre" />*@
-            <span style="color:red">@Html.ValidationMessageFor(m => m.Semestre)</span><br />
-            <div class="select">
-                <select name="format" id="format">
-                    <option selected disabled>Elija un Semestre</option>
-                    <option value="number">1</option>
-                    <option value="number">2</option>
-                </select>
+            <div class="containerBox">
+                <label for="Semestre">Semestre</label><br />
+                @*<input class="form-control" type="text" id="Semestre" name="Semestre" value="@Model.Semestre" />*@
+                <span style="color:red">@Html.ValidationMessageFor(m => m.Semestre)</span><br />
+                    <div class="select-box">
+                        <div class="options-container">
+                            <div class="option">
+                                <select class="radio" type="number" name="Semestre" id="Semestre">
+                                    <option class="radio" selected>@Model.Semestre</option>
+                                    <option class="radio" value="1">1</option>
+                                    <option class="radio" value="2">2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
             </div>
 
             <div class="flex-container">
@@ -68,5 +79,7 @@
             </div>
         </div>
     </div>
+
+<script src="Content/main.js"></script>
 
 
