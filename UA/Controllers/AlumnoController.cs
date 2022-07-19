@@ -109,10 +109,9 @@ namespace UA.Controllers
         [HttpPost]
         public ActionResult NuevaInscripcion(InscripcionViewModel model)
         {
+            ValidarAlumnoExiste(model);
             ValidarYaInscripto(model);
             ValidarMateriaExiste(model);
-            Validar7materias(model);
-            ValidarCorrelativas(model);
             if (ModelState.IsValid)
             {
                 db.Inscripcion.Add(model.AgregarId());
@@ -122,7 +121,16 @@ namespace UA.Controllers
             return View(model);
         }
 
-        private void ValidarYaInscripto(InscripcionViewModel model)
+        private void ValidarAlumnoExiste(InscripcionViewModel model)
+        {
+            List<Alumno> inscripciones = db.Alumnos.Where(d => d.ID == model.IdAlumno).ToList();
+
+            if (inscripciones.Count != 1)
+            {
+                ModelState.AddModelError(nameof(model.IDMateria), "El Alumno no esta inscripto en una carrera");
+            }
+        }
+            private void ValidarYaInscripto(InscripcionViewModel model)
         {
             bool materiaNoExiste = false;
             //filtro inscripciones del alumno
@@ -155,6 +163,11 @@ namespace UA.Controllers
             if (materiaExiste == false)
             {
                 ModelState.AddModelError(nameof(model.IDMateria), "La Materia no existe");
+            }
+            else
+            {
+                Validar7materias(model);
+                ValidarCorrelativas(model);
             }
         }
 
@@ -270,6 +283,11 @@ namespace UA.Controllers
         [HttpPost]
         public ActionResult LogIn(LogInViewModel logIn)
         {
+            List<Alumno> ids = db.Alumnos.Where(d => d.ID == logIn.Id).ToList();
+            if (ids.Count != 1)
+            {
+                ModelState.AddModelError(nameof(logIn.Id), "El alumno no esta registrado a una carrera");
+            }
             if (ModelState.IsValid)
             {
                 return RedirectToAction("MateriasAlu", new { id = logIn.Id });

@@ -66,7 +66,7 @@
 }
 
 .boxtabla {
-    width: 80%;
+    width: 90%;
     height: auto;
     padding: 5px 30px;
     /*background: #FFFFFF;*/
@@ -188,7 +188,7 @@
 
 .caja4 {
     border-radius: 15px;
-    width: 900px;
+    width: 100%;
     position: relative;
     margin: auto auto;
     background: #fff;
@@ -239,12 +239,12 @@ body {
 h2 {
     margin: 16px;
 }
-    */
+    
 
 .containerBox {
     padding: 5px;
 }
-
+*/
 .select-box {
     display: flex;
     width: 400px;
@@ -320,7 +320,7 @@ h2 {
         background: #a3ebc7;
     }
 
-.select-box label {
+.select-box option {
     cursor: pointer;
 }
 

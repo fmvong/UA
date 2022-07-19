@@ -13,11 +13,9 @@ namespace UA.Controllers
 
         public ActionResult AsignarNota(Guid id)
         {
-            //Inscripcion inscripcion = db.Inscripcion.First(i => i.Id == id);
-            NotaViewModel examen = new NotaViewModel { Id = id, Fecha = "07/06/2022", Nota = 6 };
+            DateTime Now = DateTime.Now;
+            NotaViewModel examen = new NotaViewModel { Id = id, Fecha = Now.ToString("MM/dd/yyyy") , Nota = 6 };
             return View(examen);
-
-            //return View(new NotaViewModel());
         }
 
         [HttpPost]
@@ -43,6 +41,13 @@ namespace UA.Controllers
         [HttpPost]
         public ActionResult Index(MateriaLogInViewModel materiaid)
         {
+            //Validar marteria si existe
+            List<MateriaC> materias = db.Materias.Where(d=>d.ID == materiaid.ID).ToList();
+            if(materias.Count != 1)
+            {
+                ModelState.AddModelError(nameof(materiaid.ID), "La materia no existe");
+            }
+
             if (ModelState.IsValid)
             {
                 return RedirectToAction("VerExamenes", new { id = materiaid.ID });
