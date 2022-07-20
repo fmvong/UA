@@ -143,7 +143,7 @@ namespace UA.Controllers
 
         private void ValidarCaracteres50(CarreraViewModel model)
         {
-            if (model.Carrera != null && model.Carrera.Length > 10)
+            if (model.Carrera != null && model.Carrera.Length > 50)
             {
                 ModelState.AddModelError(nameof(model.Carrera), "La Carrera tiene hasta 50 caracteres.");
             }

@@ -176,11 +176,11 @@ namespace UA.Controllers
             int materia7 = 0;
             //filtro inscripciones del alumno
             List<Inscripcion> inscripciones = db.Inscripcion.Where(d => d.IdAlumno == model.IdAlumno).ToList();
-            int semestre = db.Materias.First(i => i.ID == model.IDMateria).Semestre;
+            int semestre = db.Materias.First(i => i.ID.Trim() == model.IDMateria).Semestre;
 
             foreach (Inscripcion inscripcion in inscripciones)
             {
-                int semestreIns = db.Materias.First(i => i.ID == inscripcion.IDMateria).Semestre;
+                int semestreIns = db.Materias.First(i => i.ID.Trim() == inscripcion.IDMateria).Semestre;
                 if (inscripcion.Nota == 0 && semestre == semestreIns)
                 {
                     materia7++;
@@ -195,11 +195,11 @@ namespace UA.Controllers
         private bool ValidarCorrelativa1(InscripcionViewModel model)
         {
             bool correlativaAprovada1 = false;
-            MateriaC materia = db.Materias.First(i => i.ID == model.IDMateria);
+            MateriaC materia = db.Materias.First(i => i.ID.Trim() == model.IDMateria);
 
             if (materia.IDcorrelativa1 != null)
             {
-                MateriaC correlativa1 = db.Materias.First(i => i.ID == materia.IDcorrelativa1);
+                MateriaC correlativa1 = db.Materias.First(i => i.ID.Trim() == materia.IDcorrelativa1);
                 //MateriaC correlativa2 = db.Materias.First(i => i.ID == materia.IDcorrelativa2);
 
                 //filtro inscripciones del alumno
@@ -224,11 +224,11 @@ namespace UA.Controllers
         private bool ValidarCorrelativa2(InscripcionViewModel model)
         {
             bool correlativaAprovada2 = false;
-            MateriaC materia = db.Materias.First(i => i.ID == model.IDMateria);
+            MateriaC materia = db.Materias.First(i => i.ID.Trim() == model.IDMateria);
             if (materia.IDcorrelativa2 != null)
             {
                 //MateriaC correlativa1 = db.Materias.First(i => i.ID == materia.IDcorrelativa1);
-                MateriaC correlativa2 = db.Materias.First(i => i.ID == materia.IDcorrelativa2);
+                MateriaC correlativa2 = db.Materias.First(i => i.ID.Trim() == materia.IDcorrelativa2);
 
                 //filtro inscripciones del alumno
                 List<Inscripcion> inscripciones = db.Inscripcion.Where(d => d.IdAlumno == model.IdAlumno).ToList();
@@ -252,7 +252,7 @@ namespace UA.Controllers
 
         public void ValidarCorrelativas(InscripcionViewModel model)
         {
-            MateriaC materia = db.Materias.First(i => i.ID == model.IDMateria);
+            MateriaC materia = db.Materias.First(i => i.ID.Trim() == model.IDMateria);
             /*if (materia.IDcorrelativa2 != null && materia.IDcorrelativa1 != null)
             {*/
             if (materia.IDcorrelativa1 != null && materia.IDcorrelativa2 != null && ValidarCorrelativa1(model) == false && ValidarCorrelativa2(model) == false)
@@ -319,8 +319,8 @@ namespace UA.Controllers
             {
                 ReporteViewModel reporteModel = new ReporteViewModel(materia);
 
-                reporteModel.Materia = db.Materias.First(i => i.ID == materia.IDMateria).Materia;
-                reporteModel.Semestre = db.Materias.First(i => i.ID == materia.IDMateria).Semestre;
+                reporteModel.Materia = db.Materias.First(i => i.ID.Trim() == materia.IDMateria).Materia;
+                reporteModel.Semestre = db.Materias.First(i => i.ID.Trim() == materia.IDMateria).Semestre;
 
                 reporte.Add(reporteModel);
             }

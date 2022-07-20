@@ -42,7 +42,7 @@ namespace UA.Controllers
         public ActionResult Index(MateriaLogInViewModel materiaid)
         {
             //Validar marteria si existe
-            List<MateriaC> materias = db.Materias.Where(d=>d.ID == materiaid.ID).ToList();
+            List<MateriaC> materias = db.Materias.Where(d=>d.ID.Trim() == materiaid.ID).ToList();
             if(materias.Count != 1)
             {
                 ModelState.AddModelError(nameof(materiaid.ID), "La materia no existe");
